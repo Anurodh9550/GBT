@@ -1,11 +1,11 @@
-import { API_URL } from "@/lib/api";
+import { getApiUrl } from "@/lib/api";
 import { getAdminToken } from "@/lib/admin-auth";
 
 type Paginated<T> = { count: number; results: T[] };
 
 async function adminFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const token = getAdminToken();
-  const res = await fetch(`${API_URL}${path}`, {
+  const res = await fetch(`${getApiUrl()}${path}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function crud(base: string) {
 
 export const adminApi = {
   login: async (username: string, password: string) => {
-    const res = await fetch(`${API_URL}/api/auth/admin/login/`, {
+    const res = await fetch(`${getApiUrl()}/api/auth/admin/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

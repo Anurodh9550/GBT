@@ -1,11 +1,31 @@
-export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+import { siteConfig } from "@/lib/site-config";
+
+/** Resolved at call time so live Vercel builds work without NEXT_PUBLIC_API_URL. */
+export function getApiUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host !== "localhost" && host !== "127.0.0.1") {
+      return siteConfig.productionApiUrl;
+    }
+  }
+
+  if (process.env.VERCEL === "1") {
+    return siteConfig.productionApiUrl;
+  }
+
+  return siteConfig.localApiUrl;
+}
 
 export function apiConnectionError(): string {
+  const url = getApiUrl();
   if (typeof window !== "undefined" && !window.location.hostname.includes("localhost")) {
-    if (API_URL.includes("127.0.0.1") || API_URL.includes("localhost")) {
-      return "API not configured. In Vercel → Settings → Environment Variables, set NEXT_PUBLIC_API_URL to your Render backend (e.g. https://backend-gbt.onrender.com), then redeploy.";
+    if (url.includes("127.0.0.1") || url.includes("localhost")) {
+      return `API not configured. Set NEXT_PUBLIC_API_URL to ${siteConfig.productionApiUrl} on Vercel and redeploy.`;
     }
+    return `Cannot reach server at ${url}. Check Render backend is running and ALLOWED_HOSTS / CORS are set.`;
   }
   return "Cannot reach server. Start backend: cd backend && python manage.py runserver";
 }
@@ -22,7 +42,7 @@ export async function apiFetch<T>(
   if (token) {
     (headers as Record<string, string>)["Authorization"] = `Bearer ${token}`;
   }
-  const res = await fetch(`${API_URL}${path}`, { ...rest, headers });
+  const res = await fetch(`${getApiUrl()}${path}`, { ...rest, headers });
   if (!res.ok) {
     const err = (await res.json().catch(() => ({}))) as {
       detail?: string;
@@ -63,5 +83,3 @@ export const api = {
       body: JSON.stringify({ username, password }),
     }),
 };
-
-export { API_URL };

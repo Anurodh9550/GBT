@@ -21,6 +21,9 @@ export const siteConfig = {
     youtube: "#",
     instagram: "#",
   },
+  /** Render backend — update if your service URL changes */
+  productionApiUrl: "https://backend-gbt.onrender.com",
+  localApiUrl: "http://127.0.0.1:8000",
 };
 
 export type NavItem = {
