@@ -36,7 +36,8 @@ export default function FacultyLoginPage() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "";
       if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
-        setError("Cannot reach server. Start backend: cd backend && python manage.py runserver");
+        const { apiConnectionError } = await import("@/lib/api");
+        setError(apiConnectionError());
       } else {
         setError(msg || "Invalid employee ID or password.");
       }

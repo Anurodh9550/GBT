@@ -1,4 +1,14 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
+export function apiConnectionError(): string {
+  if (typeof window !== "undefined" && !window.location.hostname.includes("localhost")) {
+    if (API_URL.includes("127.0.0.1") || API_URL.includes("localhost")) {
+      return "API not configured. In Vercel → Settings → Environment Variables, set NEXT_PUBLIC_API_URL to your Render backend (e.g. https://backend-gbt.onrender.com), then redeploy.";
+    }
+  }
+  return "Cannot reach server. Start backend: cd backend && python manage.py runserver";
+}
 
 export async function apiFetch<T>(
   path: string,
