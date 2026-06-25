@@ -23,7 +23,7 @@ export default function StudentLoginPage() {
     setError("");
     try {
       const { api } = await import("@/lib/api");
-      const data = await api.studentLogin(roll.trim(), password);
+      const data = await api.studentLogin(roll.trim(), password.trim());
       const user = data.user as { first_name?: string; last_name?: string; student_profile?: { roll_number: string } };
       const name = [user.first_name, user.last_name].filter(Boolean).join(" ") || roll.trim();
       setStudentSession({

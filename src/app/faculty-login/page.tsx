@@ -23,7 +23,7 @@ export default function FacultyLoginPage() {
     setError("");
     try {
       const { api } = await import("@/lib/api");
-      const data = await api.facultyLogin(employeeId.trim(), password);
+      const data = await api.facultyLogin(employeeId.trim(), password.trim());
       const user = data.user as { first_name?: string; last_name?: string; faculty_profile?: { employee_id: string; department_name?: string } };
       const name = [user.first_name, user.last_name].filter(Boolean).join(" ") || "Faculty Member";
       setFacultySession({
