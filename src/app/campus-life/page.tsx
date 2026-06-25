@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import GalleryGrid from "@/components/GalleryGrid";
@@ -22,7 +23,17 @@ export default function CampusLifePage() {
             title="Our Beautiful Campus"
             align="center"
           />
-          <div className="mt-12">
+          <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
+            <Image
+              src="/gallery/campus-collage.png"
+              alt="GBT College campus collage"
+              width={1280}
+              height={720}
+              className="h-auto w-full object-cover"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          </div>
+          <div className="mt-10">
             <GalleryGrid />
           </div>
         </div>

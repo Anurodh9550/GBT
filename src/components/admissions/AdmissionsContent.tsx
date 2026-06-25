@@ -6,7 +6,6 @@ import {
   admissionCourseTabs,
   admissionProcessSteps,
   admissionDocuments,
-  featuredCourses,
 } from "@/lib/site-data";
 import AdmissionPortalCard from "@/components/admissions/AdmissionPortalCard";
 import { MotionSection, MotionDiv } from "@/components/motion";
@@ -202,8 +201,8 @@ export default function AdmissionsContent() {
                 ))}
                 <select className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none">
                   <option>Select Course</option>
-                  {featuredCourses.map((course) => (
-                    <option key={course.slug}>{course.code} — {course.title}</option>
+                  {admissionCourseTabs.map((tab) => (
+                    <option key={tab.id}>{tab.label}</option>
                   ))}
                 </select>
                 <button

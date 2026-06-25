@@ -2,35 +2,86 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, MotionDiv, MotionStagger } from "@/components/motion";
-import { defaultTransition, fadeUp, slideLeft, slideRight } from "@/lib/motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { MotionDiv, MotionStagger } from "@/components/motion";
+import { defaultTransition } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 
-type Stat = { value: string; label: string };
+const heroSlides = [
+  { src: "/hero-campus.png", alt: "GBT College main campus building" },
+  { src: "/gallery/campus-entrance.png", alt: "GBT College campus entrance" },
+  { src: "/gallery/campus-building.png", alt: "GBT College campus lawn and building" },
+  { src: "/gallery/campus-view.png", alt: "GBT College campus grounds" },
+];
 
-export default function HomeHero({
-  stats,
-}: {
-  stats: readonly Stat[];
-}) {
+const SLIDE_MS = 5500;
+
+export default function HomeHero() {
+  const [active, setActive] = useState(0);
+
+  const next = useCallback(() => {
+    setActive((i) => (i + 1) % heroSlides.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setActive((i) => (i - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(next, SLIDE_MS);
+    return () => clearInterval(id);
+  }, [next]);
+
   return (
     <section className="relative flex min-h-[90vh] items-center overflow-hidden bg-brand-black text-white">
-      <Image
-        src="/hero-campus.jpg"
-        alt={`${siteConfig.name} campus`}
-        fill
-        priority
-        className="object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/55 to-brand-black/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 via-transparent to-brand-black/30" />
-      <div className="absolute inset-0 opacity-30">
+      {/* Sliding background images */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={heroSlides[active].src}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={heroSlides[active].src}
+            alt={heroSlides[active].alt}
+            fill
+            priority={active === 0}
+            className="object-cover object-center brightness-110"
+            sizes="100vw"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-black/75 via-brand-black/45 to-brand-black/15" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-brand-black/20" />
+      <div className="absolute inset-0 opacity-20">
         <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(ellipse_at_80%_50%,#e8751a_0%,transparent_55%)]" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-24 lg:grid-cols-2 lg:py-32">
-        <MotionStagger animateOnMount>
+      {/* Slide controls */}
+      <button
+        type="button"
+        onClick={prev}
+        aria-label="Previous slide"
+        className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50 sm:left-6"
+      >
+        ‹
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        aria-label="Next slide"
+        className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50 sm:right-6"
+      >
+        ›
+      </button>
+
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-24 lg:py-32">
+        <MotionStagger animateOnMount className="max-w-2xl">
           <MotionDiv
             variant="fadeUp"
             transition={defaultTransition}
@@ -82,24 +133,21 @@ export default function HomeHero({
             </MotionDiv>
           </MotionDiv>
         </MotionStagger>
+      </div>
 
-        <MotionStagger animateOnMount className="grid grid-cols-2 gap-4">
-          {stats.map((s, i) => (
-            <MotionDiv
-              key={s.label}
-              variant="slideRight"
-              hover
-              shadow
-              transition={{ ...defaultTransition, delay: 0.15 + i * 0.08 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-            >
-              <p className="font-sans text-3xl font-bold text-white lg:text-4xl">{s.value}</p>
-              <p className="mt-2 font-sans text-sm font-normal leading-snug text-neutral-400">
-                {s.label}
-              </p>
-            </MotionDiv>
-          ))}
-        </MotionStagger>
+      {/* Slide dots */}
+      <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        {heroSlides.map((slide, i) => (
+          <button
+            key={slide.src}
+            type="button"
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => setActive(i)}
+            className={`h-2 rounded-full transition-all ${
+              i === active ? "w-8 bg-brand-orange" : "w-2 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
       </div>
 
       <MotionDiv

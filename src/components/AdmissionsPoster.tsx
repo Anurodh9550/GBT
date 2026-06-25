@@ -10,10 +10,17 @@ export default function AdmissionsPoster() {
         href="/admissions"
         className="group relative block overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5 transition hover:shadow-[0_24px_48px_-12px_rgba(92,46,46,0.35)]"
       >
-        <div className="relative aspect-[16/11] bg-gradient-to-br from-brand-maroon via-brand-maroon-dark to-brand-black sm:aspect-[16/10]">
+        <div className="relative aspect-[16/11] sm:aspect-[16/10]">
+          <Image
+            src="/gallery/campus-building.png"
+            alt={`${siteConfig.name} campus`}
+            fill
+            className="object-cover object-center transition duration-700 group-hover:scale-105"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-maroon/90 via-brand-maroon-dark/85 to-brand-black/80" />
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-orange/20 blur-2xl" />
           <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-brand-green/15 blur-2xl" />
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImevenoddIj48ZyBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDMiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIvPjwvZz48L2c+PC9zdmc+')] opacity-60" />
 
           <div className="relative flex h-full flex-col justify-between p-5 sm:p-6">
             <div className="flex items-center gap-3">

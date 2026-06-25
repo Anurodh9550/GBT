@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AboutSections from "@/components/AboutSections";
 import HomeHero from "@/components/HomeHero";
+import HomeStatsRow from "@/components/HomeStatsRow";
 import AdmissionsPoster from "@/components/AdmissionsPoster";
 import OurCoursesSection from "@/components/OurCoursesSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -12,7 +13,6 @@ import CTABanner from "@/components/CTABanner";
 import { MotionSection, MotionStagger, MotionItem, MotionCard } from "@/components/motion";
 import { siteConfig } from "@/lib/site-config";
 import {
-  stats,
   whyChoose,
   departments,
   campusHighlights,
@@ -24,7 +24,8 @@ import {
 export default function Home() {
   return (
     <>
-      <HomeHero stats={stats} />
+      <HomeHero />
+      <HomeStatsRow />
 
       {/* ── ADMISSIONS HIGHLIGHT ── */}
       <MotionSection className="section-padding bg-white">

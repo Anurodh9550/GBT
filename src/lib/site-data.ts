@@ -190,7 +190,12 @@ export type GalleryItem = {
 };
 
 export const galleryItems: GalleryItem[] = [
-  { title: "Main Campus", image: "/gallery/main-campus.jpg", category: "Campus" },
+  { title: "Campus Entrance", image: "/gallery/campus-entrance.png", category: "Campus" },
+  { title: "Main Campus Building", image: "/gallery/campus-building.png", category: "Campus" },
+  { title: "Campus Overview", image: "/gallery/campus-collage.png", category: "Campus" },
+  { title: "College Main Gate", image: "/gallery/campus-gate.png", category: "Campus" },
+  { title: "Campus Grounds", image: "/gallery/campus-view.png", category: "Campus" },
+  { title: "Campus Lawn & Walkway", image: "/gallery/campus-overview.png", category: "Campus" },
   { title: "Central Library", image: "/gallery/library.jpg", category: "Campus" },
   { title: "Computer Lab", image: "/gallery/computer-lab.jpg", category: "Labs" },
   { title: "Sports Ground", image: "/gallery/sports-ground.jpg", category: "Sports" },
@@ -334,12 +339,39 @@ export type AdmissionCourseTab = {
 
 export const admissionCourseTabs: AdmissionCourseTab[] = [
   {
+    id: "bds",
+    label: "BDS (5 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10+2 with Physics, Chemistry & Biology (PCB) from a recognized board." },
+      { icon: "medal", text: "Minimum 50% aggregate marks in PCB (40% for reserved categories)." },
+      { icon: "check", text: "Valid NEET-UG score as per current dental admission norms." },
+    ],
+  },
+  {
+    id: "d-pharma",
+    label: "D-Pharma (2 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10+2 with Physics, Chemistry & Biology/Mathematics from a recognized board." },
+      { icon: "medal", text: "Minimum 45% aggregate marks (40% for reserved categories)." },
+      { icon: "check", text: "Merit-based selection or institute-level entrance test where applicable." },
+    ],
+  },
+  {
     id: "btech",
     label: "B.Tech (4 Years)",
     criteria: [
       { icon: "document", text: "Passed 10+2 with Physics, Chemistry & Mathematics (PCM) from a recognized board." },
       { icon: "medal", text: "Minimum 45% aggregate marks in PCM (40% for reserved categories)." },
       { icon: "check", text: "Valid JEE Main score or State Level Engineering Entrance Exam." },
+    ],
+  },
+  {
+    id: "mtech",
+    label: "M.Tech (2 Years)",
+    criteria: [
+      { icon: "document", text: "B.Tech / B.E. in relevant discipline from a recognized university." },
+      { icon: "medal", text: "Minimum 55% aggregate marks (50% for reserved categories)." },
+      { icon: "check", text: "Valid GATE score or institute-level entrance test where applicable." },
     ],
   },
   {
@@ -352,12 +384,57 @@ export const admissionCourseTabs: AdmissionCourseTab[] = [
     ],
   },
   {
+    id: "bcom",
+    label: "B.Com (3 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10+2 in Commerce or any stream from a recognized board." },
+      { icon: "medal", text: "Minimum 45% aggregate marks (40% for reserved categories)." },
+      { icon: "check", text: "Merit-based admission as per institute norms." },
+    ],
+  },
+  {
+    id: "bba",
+    label: "BBA (3 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10+2 in any stream from a recognized board." },
+      { icon: "medal", text: "Minimum 45% aggregate marks (40% for reserved categories)." },
+      { icon: "check", text: "Merit-based selection or personal interview where applicable." },
+    ],
+  },
+  {
+    id: "bsc",
+    label: "B.Sc (3 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10+2 with Science stream (PCM/PCB) from a recognized board." },
+      { icon: "medal", text: "Minimum 45% aggregate marks (40% for reserved categories)." },
+      { icon: "check", text: "Merit-based admission as per chosen specialization." },
+    ],
+  },
+  {
     id: "mba",
     label: "MBA (2 Years)",
     criteria: [
       { icon: "document", text: "Bachelor's degree in any discipline from a recognized university." },
       { icon: "medal", text: "Minimum 50% aggregate marks (45% for reserved categories)." },
       { icon: "check", text: "Valid CAT / MAT / CMAT score or institute-level entrance test." },
+    ],
+  },
+  {
+    id: "ma",
+    label: "M.A (2 Years)",
+    criteria: [
+      { icon: "document", text: "Bachelor's degree in relevant discipline from a recognized university." },
+      { icon: "medal", text: "Minimum 50% aggregate marks (45% for reserved categories)." },
+      { icon: "check", text: "Merit-based selection or department entrance test where applicable." },
+    ],
+  },
+  {
+    id: "diploma",
+    label: "Diploma (3 Years)",
+    criteria: [
+      { icon: "document", text: "Passed 10th standard from a recognized board for entry-level diploma programs." },
+      { icon: "medal", text: "Minimum 40% aggregate marks (relaxation for reserved categories as per norms)." },
+      { icon: "check", text: "Merit-based admission or polytechnic entrance exam where applicable." },
     ],
   },
 ];
