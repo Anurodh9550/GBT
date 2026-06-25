@@ -8,7 +8,7 @@ export function useAdminList(
   loadFn: () => Promise<Record<string, unknown>[]>,
   searchKeys?: string[]
 ) {
-  const { toast } = useAdminToast();
+  const { toast, withProgress } = useAdminToast();
   const [items, setItems] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -18,7 +18,7 @@ export function useAdminList(
     setLoading(true);
     setError("");
     try {
-      const data = await loadFn();
+      const data = await withProgress(() => loadFn());
       setItems(data);
     } catch (err) {
       const msg = parseAdminError(err);
@@ -27,7 +27,7 @@ export function useAdminList(
     } finally {
       setLoading(false);
     }
-  }, [loadFn, toast]);
+  }, [loadFn, toast, withProgress]);
 
   useEffect(() => {
     reload();

@@ -8,6 +8,7 @@ import { useAdminToast } from "@/components/admin-panel/AdminProvider";
 import { useAdminList } from "@/hooks/useAdminList";
 import { adminApi, getDepartmentOptions } from "@/lib/admin-api";
 import { ADMIN_INPUT, ADMIN_SELECT, parseAdminError } from "@/lib/admin-utils";
+import PasswordInput from "@/components/ui/PasswordInput";
 
 export default function AdminFacultyPage() {
   const { toast } = useAdminToast();
@@ -63,7 +64,15 @@ export default function AdminFacultyPage() {
       {showForm && (
         <AdminFormPanel title="New Faculty Account" onSubmit={handleSubmit} submitLabel="Create Faculty" loading={saving}>
           <AdminField label="Username"><input required value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} className={ADMIN_INPUT} /></AdminField>
-          <AdminField label="Password"><input required type="password" minLength={6} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className={ADMIN_INPUT} /></AdminField>
+          <AdminField label="Password">
+            <PasswordInput
+              required
+              minLength={6}
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              inputClassName={`${ADMIN_INPUT} pr-11`}
+            />
+          </AdminField>
           <AdminField label="First Name"><input required value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} className={ADMIN_INPUT} /></AdminField>
           <AdminField label="Last Name"><input value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} className={ADMIN_INPUT} /></AdminField>
           <AdminField label="Email"><input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={ADMIN_INPUT} /></AdminField>

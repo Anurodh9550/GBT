@@ -7,9 +7,12 @@ import Image from "next/image";
 import { adminApi } from "@/lib/admin-api";
 import { setAdminSession, type AdminUser } from "@/lib/admin-auth";
 import { siteConfig } from "@/lib/site-config";
+import PasswordInput from "@/components/ui/PasswordInput";
+import { useUi } from "@/components/ui/UiProvider";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const { toast, withProgress } = useUi();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,14 +20,23 @@ export default function AdminLoginPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!username.trim() || !password.trim()) {
+      setError("Please enter username and password.");
+      toast("Please enter username and password.", "error");
+      return;
+    }
     setLoading(true);
     setError("");
     try {
-      const data = await adminApi.login(username, password);
-      setAdminSession(data.access, data.user as AdminUser);
-      router.push("/admin-panel");
+      await withProgress(async () => {
+        const data = await adminApi.login(username.trim(), password.trim());
+        setAdminSession(data.access, data.user as AdminUser);
+        toast("Welcome to Admin Console", "success");
+        router.push("/admin-panel");
+      });
     } catch {
       setError("Invalid admin credentials.");
+      toast("Invalid admin credentials.", "error");
     } finally {
       setLoading(false);
     }
@@ -46,17 +58,17 @@ export default function AdminLoginPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              disabled={loading}
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange disabled:opacity-60"
               placeholder="admin"
             />
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
-            <input
-              type="password"
+            <PasswordInput
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              disabled={loading}
             />
           </div>
           <button
@@ -64,7 +76,7 @@ export default function AdminLoginPage() {
             disabled={loading}
             className="btn-primary w-full justify-center disabled:opacity-60"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Signing in…" : "Sign In"}
           </button>
         </form>
         <p className="mt-6 text-center text-xs text-slate-400">

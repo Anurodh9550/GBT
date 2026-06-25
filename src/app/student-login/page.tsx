@@ -7,39 +7,54 @@ import PageHero from "@/components/PageHero";
 import { MotionSection, MotionDiv } from "@/components/motion";
 import { setStudentSession } from "@/components/student-erp/StudentErpShell";
 import PortalIcon from "@/components/PortalIcon";
+import PasswordInput from "@/components/ui/PasswordInput";
+import { useUi } from "@/components/ui/UiProvider";
 
 export default function StudentLoginPage() {
   const router = useRouter();
+  const { toast, withProgress } = useUi();
   const [roll, setRoll] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!roll.trim() || !password.trim()) {
       setError("Please enter roll number and password.");
+      toast("Please enter roll number and password.", "error");
       return;
     }
     setError("");
+    setLoading(true);
     try {
-      const { api } = await import("@/lib/api");
-      const data = await api.studentLogin(roll.trim(), password.trim());
-      const user = data.user as { first_name?: string; last_name?: string; student_profile?: { roll_number: string } };
-      const name = [user.first_name, user.last_name].filter(Boolean).join(" ") || roll.trim();
-      setStudentSession({
-        name,
-        roll: user.student_profile?.roll_number || roll.trim().toUpperCase(),
+      await withProgress(async () => {
+        const { api } = await import("@/lib/api");
+        const data = await api.studentLogin(roll.trim(), password.trim());
+        const user = data.user as { first_name?: string; last_name?: string; student_profile?: { roll_number: string } };
+        const name = [user.first_name, user.last_name].filter(Boolean).join(" ") || roll.trim();
+        setStudentSession({
+          name,
+          roll: user.student_profile?.roll_number || roll.trim().toUpperCase(),
+        });
+        localStorage.setItem("gbt-access-token", data.access);
+        toast("Login successful! Redirecting…", "success");
+        router.push("/student-erp");
       });
-      localStorage.setItem("gbt-access-token", data.access);
-      router.push("/student-erp");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "";
       if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
         const { apiConnectionError } = await import("@/lib/api");
-        setError(apiConnectionError());
+        const connectionError = apiConnectionError();
+        setError(connectionError);
+        toast(connectionError, "error");
       } else {
-        setError(msg || "Invalid roll number or password.");
+        const loginError = msg || "Invalid roll number or password.";
+        setError(loginError);
+        toast(loginError, "error");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,29 +86,29 @@ export default function StudentLoginPage() {
                   value={roll}
                   onChange={(e) => setRoll(e.target.value)}
                   placeholder="e.g. GBT2024001"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+                  disabled={loading}
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange disabled:opacity-60"
                 />
               </div>
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
-                <input
-                  type="password"
+                <PasswordInput
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+                  disabled={loading}
                 />
               </div>
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="rounded" /> Remember me
+                  <input type="checkbox" className="rounded" disabled={loading} /> Remember me
                 </label>
                 <Link href="/contact" className="font-medium text-brand-orange hover:text-brand-orange-light">
                   Forgot password?
                 </Link>
               </div>
-              <button type="submit" className="btn-primary w-full justify-center">
-                Login
+              <button type="submit" disabled={loading} className="btn-primary w-full justify-center disabled:opacity-60">
+                {loading ? "Signing in…" : "Login"}
               </button>
             </form>
             <p className="mt-6 text-center text-xs text-slate-400">
