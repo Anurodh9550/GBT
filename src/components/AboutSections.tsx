@@ -220,7 +220,7 @@ export default function AboutSections({
           <MotionDiv shadow variant="fadeUp" className="mx-auto mb-8 max-w-3xl text-center lg:mb-10">
             <p className="text-eyebrow text-brand-orange">About Our Institution</p>
             <h2 className="mt-4 font-serif text-3xl font-bold text-brand-maroon sm:text-4xl lg:text-[2.75rem]">
-              Discover <span className="text-brand-green">Gautam Buddha College</span>
+              Discover <span className="text-brand-green">{siteConfig.name}</span>
             </h2>
             <p className="text-body-lg mt-5 text-slate-600">
               A legacy of excellence under {siteConfig.trust} — shaping ethical leaders and

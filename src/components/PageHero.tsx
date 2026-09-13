@@ -73,6 +73,8 @@ function eyebrow(title: string) {
     Admissions: "Admissions",
     Courses: "Academics",
     Contact: "Get in Touch",
+    "Campus Life": "Student Experience",
+    "Placements & Careers": "Healthcare Careers",
   };
   return map[title] ?? title;
 }

@@ -1,11 +1,11 @@
 import ErpContentPage from "@/components/student-erp/ErpContentPage";
 
 const schedule = [
-  { day: "Monday", periods: ["Data Structures", "Mathematics II", "English", "Lab — DS"] },
-  { day: "Tuesday", periods: ["Mathematics II", "Elective", "Data Structures", "Sports"] },
-  { day: "Wednesday", periods: ["Data Structures", "English", "Mathematics II", "Seminar"] },
-  { day: "Thursday", periods: ["Lab — DS", "Mathematics II", "English", "Library"] },
-  { day: "Friday", periods: ["Data Structures", "Mathematics II", "Guest Lecture", "—"] },
+  { day: "Monday", periods: ["Principles of Management", "Financial Accounting", "English", "Seminar"] },
+  { day: "Tuesday", periods: ["Financial Accounting", "Elective", "Business Communication", "Sports"] },
+  { day: "Wednesday", periods: ["Principles of Management", "English", "Financial Accounting", "Library"] },
+  { day: "Thursday", periods: ["Business Communication", "Financial Accounting", "English", "Tutorial"] },
+  { day: "Friday", periods: ["Principles of Management", "Business Communication", "Guest Lecture", "—"] },
 ];
 
 export default function Page() {

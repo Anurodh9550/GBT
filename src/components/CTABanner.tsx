@@ -16,7 +16,7 @@ type CTABannerProps = {
 export default function CTABanner({
   title,
   subtitle,
-  primaryLabel = "Apply Now →",
+  primaryLabel = "Register Now for Admission →",
   primaryHref = "/admissions",
   secondaryLabel = "View Programs",
   secondaryHref = "/courses",

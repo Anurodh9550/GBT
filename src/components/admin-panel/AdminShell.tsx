@@ -98,7 +98,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <Link href="/admin-panel" className="flex items-center gap-2.5">
             <Image src={siteConfig.logo} alt={siteConfig.name} width={32} height={32} className="rounded-full" />
             <div className="hidden sm:block">
-              <span className="block font-serif text-sm font-bold leading-tight text-brand-maroon">GBT ERP Admin</span>
+              <span className="block font-serif text-sm font-bold leading-tight text-brand-maroon">GBCE ERP Admin</span>
               <span className="block text-[10px] font-medium uppercase tracking-wider text-slate-400">Control Panel</span>
             </div>
           </Link>

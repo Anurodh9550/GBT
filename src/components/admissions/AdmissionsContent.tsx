@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
   admissionCourseTabs,
   admissionProcessSteps,
   admissionDocuments,
 } from "@/lib/site-data";
+import { siteConfig } from "@/lib/site-config";
 import AdmissionPortalCard from "@/components/admissions/AdmissionPortalCard";
 import { MotionSection, MotionDiv } from "@/components/motion";
+import Link from "next/link";
 
 function CriterionIcon({ type }: { type: "document" | "medal" | "check" }) {
   const cn = "h-5 w-5 text-brand-orange";
@@ -70,6 +71,14 @@ export default function AdmissionsContent() {
       {/* Eligibility */}
       <MotionSection className="section-padding bg-white">
         <div className="mx-auto max-w-7xl px-4">
+            <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-orange/20 bg-brand-orange/5 px-5 py-4">
+            <p className="text-sm font-medium text-slate-700">
+              New student? Start your admission registration for session {siteConfig.admissionBatch}.
+            </p>
+            <Link href="#official-portal" className="shrink-0 rounded-full border-2 border-brand-orange bg-white px-5 py-2.5 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white">
+              {siteConfig.registerCtaLabel} →
+            </Link>
+          </div>
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <p className="text-eyebrow text-brand-orange">Eligibility Criteria</p>
@@ -148,15 +157,18 @@ export default function AdmissionsContent() {
                 ))}
               </div>
 
-              <Link
-                href="/contact"
+              <a
+                href={siteConfig.admissionFormPdf}
+                download="GBCE-Admission-Form.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-brand-orange px-6 py-3 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Download Brochure
-              </Link>
+                Download Admission Form (PDF)
+              </a>
             </div>
             <div className="hidden lg:block">
               <AdmissionPortalCard />
@@ -186,32 +198,40 @@ export default function AdmissionsContent() {
                   </li>
                 ))}
               </ul>
+              <a
+                href={siteConfig.admissionFormPdf}
+                download="GBCE-Admission-Form.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-maroon px-4 py-3 text-sm font-bold text-white transition hover:bg-brand-maroon-dark"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Full Form — See What&apos;s Needed (PDF)
+              </a>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-lg">
               <p className="text-eyebrow text-brand-orange">Apply Online</p>
               <h3 className="mt-2 font-serif text-2xl font-bold text-brand-maroon">Start Your Application</h3>
-              <form className="mt-6 space-y-4">
-                {["Full Name", "Email Address", "Mobile Number"].map((ph, i) => (
-                  <input
-                    key={ph}
-                    type={i === 1 ? "email" : i === 2 ? "tel" : "text"}
-                    placeholder={ph}
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
-                  />
-                ))}
-                <select className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none">
-                  <option>Select Course</option>
-                  {admissionCourseTabs.map((tab) => (
-                    <option key={tab.id}>{tab.label}</option>
-                  ))}
-                </select>
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-brand-orange py-3.5 font-bold text-white transition hover:bg-brand-orange-light"
-                >
-                  Submit Application
-                </button>
-              </form>
+              <p className="mt-3 text-sm text-slate-600">
+                Use the Official Admission Portal card above to open the full registration form.
+              </p>
+              <Link
+                href="#official-portal"
+                className="mt-6 block w-full rounded-full bg-brand-orange py-3.5 text-center font-bold text-white transition hover:bg-brand-orange-light"
+              >
+                Go to Registration Portal →
+              </Link>
+              <a
+                href={siteConfig.admissionFormPdf}
+                download="GBCE-Admission-Form.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 block text-center text-sm font-medium text-brand-orange hover:underline"
+              >
+                Or download the registration form (PDF)
+              </a>
             </div>
           </div>
         </div>

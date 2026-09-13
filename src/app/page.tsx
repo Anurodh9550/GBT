@@ -85,7 +85,7 @@ export default function Home() {
       <MotionSection className="section-padding bg-slate-50">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
-            eyebrow="Why Choose GBT"
+            eyebrow={`Why Choose ${siteConfig.shortName}`}
             title="Built for the Future of Education"
             subtitle="We combine rigorous academics with real-world exposure, giving students the competitive edge they need to excel."
             align="center"
@@ -129,7 +129,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Campus Life"
             title="Our Beautiful Campus"
-            subtitle="Sprawling green lawns, modern architecture, and a vibrant community — experience GBT College like never before."
+            subtitle={`Sprawling green lawns, modern architecture, and a vibrant community — experience ${siteConfig.name} like never before.`}
             align="center"
           />
           <MotionStagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -178,7 +178,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Student Voices"
             title="What Our Alumni Say"
-            subtitle="Real stories from our graduates — discovering how the GBT experience shaped their careers."
+            subtitle={`Real stories from our graduates — discovering how the ${siteConfig.shortName} experience shaped their careers.`}
             align="center"
           />
           <MotionStagger className="mt-14 grid gap-6 md:grid-cols-3">

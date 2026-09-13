@@ -6,10 +6,10 @@ export const metadata = { title: "News & Events" };
 
 const events = [
   { date: "15 Jun 2026", title: "Annual Convocation 2026", desc: "Graduation ceremony for batch 2022-2025. Chief guest: Dr. Meera Joshi, Vice Chancellor.", tag: "Event" },
-  { date: "10 Jun 2026", title: "Campus Placement Drive", desc: "15+ companies visiting campus including TCS, Infosys, and Wipro for final year students.", tag: "Placement" },
+  { date: "10 Jun 2026", title: "Campus Placement Drive", desc: "Hospitals, dental clinics, pharmacies, and diagnostic labs visiting campus for BDS, D-Pharma, and paramedical students.", tag: "Placement" },
   { date: "05 Jun 2026", title: "Admission Open – Session 2026-27", desc: "Online applications now open for UG and PG programs. Last date: 31 July 2026.", tag: "Admission" },
   { date: "01 Jun 2026", title: "Inter-College Sports Meet", desc: "Annual sports championship hosted by our college. Registration open for all students.", tag: "Sports" },
-  { date: "28 May 2026", title: "Workshop on AI & Machine Learning", desc: "Two-day hands-on workshop by industry experts for CS and BCA students.", tag: "Workshop" },
+  { date: "28 May 2026", title: "Workshop on Healthcare & Pharmacy Careers", desc: "Two-day career workshop by industry experts for BDS and D-Pharma students.", tag: "Workshop" },
   { date: "20 May 2026", title: "NAAC Accreditation Renewed", desc: "Our college receives NAAC A grade accreditation for the next 5 years.", tag: "Achievement" },
 ];
 

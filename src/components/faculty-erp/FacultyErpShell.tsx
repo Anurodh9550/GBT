@@ -130,7 +130,7 @@ export default function FacultyErpShell({ children }: { children: React.ReactNod
           </button>
           <Link href="/faculty-erp" className="flex items-center gap-2">
             <Image src={siteConfig.logo} alt={siteConfig.name} width={36} height={36} className="rounded-full ring-2 ring-white/30" />
-            <span className="hidden font-semibold sm:inline">{siteConfig.name}</span>
+            <span className="hidden font-semibold sm:inline">{siteConfig.shortName}</span>
           </Link>
         </div>
         <div className="relative">

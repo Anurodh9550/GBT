@@ -6,10 +6,10 @@ import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
 export const metadata = { title: "Online Classes" };
 
 const classes = [
-  { subject: "Data Structures", faculty: "Dr. Priya Singh", time: "10:00 AM - 11:00 AM", day: "Mon, Wed, Fri", status: "Live" },
+  { subject: "Principles of Management", faculty: "Dr. Priya Singh", time: "10:00 AM - 11:00 AM", day: "Mon, Wed, Fri", status: "Live" },
   { subject: "Business Economics", faculty: "Prof. Anil Mehta", time: "12:00 PM - 1:00 PM", day: "Tue, Thu", status: "Scheduled" },
   { subject: "English Literature", faculty: "Dr. Kavita Rao", time: "2:00 PM - 3:00 PM", day: "Mon, Wed", status: "Scheduled" },
-  { subject: "Mathematics II", faculty: "Prof. Suresh Patel", time: "9:00 AM - 10:00 AM", day: "Daily", status: "Live" },
+  { subject: "Financial Accounting", faculty: "Prof. Suresh Patel", time: "9:00 AM - 10:00 AM", day: "Daily", status: "Live" },
 ];
 
 export default function OnlineClassesPage() {

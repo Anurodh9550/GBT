@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, MotionStagger, MotionItem } from "@/components/motion";
 import { mainNav, portalNav, siteConfig } from "@/lib/site-config";
+import RegisterButton from "@/components/RegisterButton";
 
 export default function Footer() {
   return (
@@ -35,6 +36,15 @@ export default function Footer() {
               Empowering students with quality education, modern infrastructure,
               and real-world opportunities since 1998.
             </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <RegisterButton variant="outline" className="!border-white/30 !bg-white/10 !text-white hover:!bg-brand-orange hover:!text-white hover:!border-brand-orange" />
+              <Link
+                href={siteConfig.enquiryFormUrl}
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/20"
+              >
+                {siteConfig.enquiryCtaLabel} →
+              </Link>
+            </div>
             <div className="mt-5 flex gap-3">
               {(
                 [
@@ -97,7 +107,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm font-normal">
               <li>{siteConfig.address}</li>
               <li>
-                <a href={`tel:${siteConfig.phone}`} className="hover:text-white">
+                <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="hover:text-white">
                   {siteConfig.phone}
                 </a>
               </li>

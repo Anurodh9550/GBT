@@ -18,8 +18,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.trust,
-    template: `%s | ${siteConfig.trust}`,
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.shortName}`,
   },
   description: `${siteConfig.trust} - ${siteConfig.tagline}. Admissions open for UG & PG courses at ${siteConfig.name}.`,
   icons: {

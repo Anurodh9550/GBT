@@ -1,7 +1,7 @@
 import ErpContentPage from "@/components/student-erp/ErpContentPage";
 
 const assignments = [
-  { title: "Assignment 3 – Binary Trees", subject: "Data Structures", due: "20 Jun 2026", status: "Pending" },
+  { title: "Assignment 3 – Marketing Mix Case", subject: "Principles of Management", due: "20 Jun 2026", status: "Pending" },
   { title: "Case Study – Market Analysis", subject: "Business Economics", due: "18 Jun 2026", status: "Submitted" },
   { title: "Essay – Shakespeare's Sonnets", subject: "English Literature", due: "22 Jun 2026", status: "Pending" },
 ];

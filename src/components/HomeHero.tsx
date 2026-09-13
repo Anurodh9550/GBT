@@ -7,12 +7,13 @@ import { useCallback, useEffect, useState } from "react";
 import { MotionDiv, MotionStagger } from "@/components/motion";
 import { defaultTransition } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
+import RegisterButton from "@/components/RegisterButton";
 
 const heroSlides = [
-  { src: "/hero-campus.png", alt: "GBT College main campus building" },
-  { src: "/gallery/campus-entrance.png", alt: "GBT College campus entrance" },
-  { src: "/gallery/campus-building.png", alt: "GBT College campus lawn and building" },
-  { src: "/gallery/campus-view.png", alt: "GBT College campus grounds" },
+  { src: "/hero-campus.png", alt: "Gautam Buddha College of Education main campus building" },
+  { src: "/gallery/campus-entrance.png", alt: "Gautam Buddha College of Education campus entrance" },
+  { src: "/gallery/campus-building.png", alt: "Gautam Buddha College of Education campus lawn and building" },
+  { src: "/gallery/campus-view.png", alt: "Gautam Buddha College of Education campus grounds" },
 ];
 
 const SLIDE_MS = 5500;
@@ -121,13 +122,16 @@ export default function HomeHero() {
             className="mt-10 flex flex-wrap gap-4"
           >
             <MotionDiv hover className="rounded-full">
-              <Link href="/admissions" className="btn-primary">
-                Apply Now for Admission
+              <Link href={siteConfig.enquiryFormUrl} className="btn-primary">
+                {siteConfig.enquiryCtaLabel}
                 <span aria-hidden="true">→</span>
               </Link>
             </MotionDiv>
             <MotionDiv hover className="rounded-full">
-              <Link href="/about-trust" className="btn-outline-white">
+              <RegisterButton variant="outline-white" />
+            </MotionDiv>
+            <MotionDiv hover className="rounded-full">
+              <Link href="/about-trust" className="btn-outline-white !border-white/30 !text-white/90 hover:!bg-white/10">
                 Discover More
               </Link>
             </MotionDiv>

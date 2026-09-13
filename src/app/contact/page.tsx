@@ -27,7 +27,7 @@ export default function ContactPage() {
                 <SectionHeading eyebrow="Reach Us" title="Office Address" />
                 <div className="mt-6 space-y-4 text-slate-600">
                   <p>{siteConfig.address}</p>
-                  <p><a href={`tel:${siteConfig.phone}`} className="font-medium hover:text-brand-orange">{siteConfig.phone}</a></p>
+                  <p><a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="font-medium hover:text-brand-orange">{siteConfig.phone}</a></p>
                   <p><a href={`mailto:${siteConfig.email}`} className="font-medium hover:text-brand-orange">{siteConfig.email}</a></p>
                 </div>
               </div>
@@ -72,8 +72,14 @@ export default function ContactPage() {
               </form>
             </div>
           </div>
-          <MotionDiv shadow className="card-surface mt-12 flex aspect-[21/9] items-center justify-center bg-slate-100">
-            <p className="text-sm text-slate-500">Campus map — Google Maps embed</p>
+          <MotionDiv shadow className="card-surface mt-12 overflow-hidden">
+            <iframe
+              title={`${siteConfig.name} campus location`}
+              src={siteConfig.mapsEmbedUrl}
+              className="aspect-[21/9] w-full min-h-[280px] border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </MotionDiv>
         </div>
       </MotionSection>

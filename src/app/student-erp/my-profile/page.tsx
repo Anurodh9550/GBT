@@ -27,7 +27,7 @@ export default function Page() {
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase text-slate-400">Program</dt>
-              <dd className="mt-1 font-medium text-slate-800">B.Tech — Computer Science</dd>
+              <dd className="mt-1 font-medium text-slate-800">BBA — General Management</dd>
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase text-slate-400">Session</dt>

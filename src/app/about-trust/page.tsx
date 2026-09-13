@@ -55,7 +55,7 @@ export default function AboutTrustPage() {
       </MotionSection>
       <CTABanner
         title="Join Our Legacy of Excellence"
-        subtitle="Apply for admissions and become part of the GBT family."
+        subtitle="Apply for admissions and become part of the GBCE family."
         secondaryLabel="Contact Us"
         secondaryHref="/contact"
       />

@@ -33,7 +33,7 @@ export default function CourseCard({ course }: CourseCardProps) {
               className="shrink-0 rounded-full object-cover"
             />
             <span className="truncate text-[10px] font-semibold uppercase leading-tight text-slate-700 sm:text-[11px]">
-              {siteConfig.name}
+              {siteConfig.shortName}
             </span>
           </div>
           <span className="shrink-0 rounded-full bg-brand-orange px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">

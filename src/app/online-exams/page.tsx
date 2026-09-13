@@ -5,10 +5,10 @@ import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
 export const metadata = { title: "Online Exams" };
 
 const exams = [
-  { name: "Mid-Term – Data Structures", date: "25 Jun 2026", time: "10:00 AM - 12:00 PM", duration: "2 Hours", type: "MCQ + Coding" },
+  { name: "Mid-Term – Principles of Management", date: "25 Jun 2026", time: "10:00 AM - 12:00 PM", duration: "2 Hours", type: "MCQ + Short Answer" },
   { name: "Unit Test – Economics", date: "28 Jun 2026", time: "11:00 AM - 12:00 PM", duration: "1 Hour", type: "MCQ" },
-  { name: "End Semester – Mathematics", date: "05 Jul 2026", time: "9:00 AM - 12:00 PM", duration: "3 Hours", type: "Descriptive" },
-  { name: "Practical – Web Development", date: "10 Jul 2026", time: "2:00 PM - 4:00 PM", duration: "2 Hours", type: "Project Based" },
+  { name: "End Semester – Financial Accounting", date: "05 Jul 2026", time: "9:00 AM - 12:00 PM", duration: "3 Hours", type: "Descriptive" },
+  { name: "Practical – Business Communication", date: "10 Jul 2026", time: "2:00 PM - 4:00 PM", duration: "2 Hours", type: "Viva / Presentation" },
 ];
 
 export default function OnlineExamsPage() {

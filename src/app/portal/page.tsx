@@ -3,7 +3,8 @@ import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import PortalIcon, { portalIconIdFromLabel } from "@/components/PortalIcon";
 import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
-import { portalNav } from "@/lib/site-config";
+import { portalNav, siteConfig } from "@/lib/site-config";
+import RegisterButton from "@/components/RegisterButton";
 
 export const metadata = { title: "Portal" };
 
@@ -68,6 +69,16 @@ export default function PortalPage() {
               </MotionCard>
             ))}
           </MotionStagger>
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <p className="text-sm text-slate-600">Not enrolled yet?</p>
+            <RegisterButton variant="outline" />
+            <Link
+              href={siteConfig.enquiryFormUrl}
+              className="text-sm font-bold text-brand-orange hover:underline"
+            >
+              {siteConfig.enquiryCtaLabel} →
+            </Link>
+          </div>
         </div>
       </MotionSection>
     </>

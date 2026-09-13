@@ -4,6 +4,7 @@ import CourseCard from "@/components/CourseCard";
 import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
 import { featuredCourses } from "@/lib/site-data";
 import { siteConfig } from "@/lib/site-config";
+import RegisterButton from "@/components/RegisterButton";
 
 export const metadata = { title: "Courses" };
 
@@ -30,9 +31,13 @@ export default function CoursesPage() {
               </MotionCard>
             ))}
           </MotionStagger>
-          <div className="mt-12 text-center">
-            <Link href="/admissions" className="btn-primary">
-              Apply for Admission →
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <RegisterButton />
+            <Link
+              href={siteConfig.enquiryFormUrl}
+              className="rounded-full border-2 border-brand-orange px-6 py-3 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white"
+            >
+              {siteConfig.enquiryCtaLabel} →
             </Link>
           </div>
         </div>

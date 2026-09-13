@@ -1,14 +1,25 @@
 export const siteConfig = {
-  name: "Gautam Buddha College",
-  shortName: "GBT",
+  name: "Gautam Buddha College of Education",
+  shortName: "GBCE",
   tagline: "Excellence in Education Since 1998",
   trust: "Gautam Buddha Educational Trust",
   established: "1998",
-  phone: "+91 98765 43210",
+  phone: "+91 93126 41500",
   email: "info@gbtedtrust.edu.in",
-  address: "123 Education Lane, Knowledge Park, New Delhi - 110001",
+  address: "Village Nagara, Post Itahiya, District Jalaun, Uttar Pradesh - 285123",
+  mapsEmbedUrl:
+    "https://maps.google.com/maps?q=Village%20Nagara%2C%20Post%20Itahiya%2C%20District%20Jalaun%2C%20Uttar%20Pradesh%20285123&z=15&output=embed",
   logo: "/logo.png",
   admissionBatch: "2026–27",
+  /** Official GBCE admission / registration form (public/) */
+  admissionFormPdf: "/gbce-admission-form.pdf",
+  ctaRegisterLabel: "Register Now for Admission",
+  enquiryCtaLabel: "Enquiry Now",
+  registerCtaLabel: "Register",
+  /** College Enquiry Form (on-site) */
+  enquiryFormUrl: "/enquiry",
+  /** Full admission registration portal */
+  admissionRegisterUrl: "/admissions/register",
   colors: {
     orange: "#e8751a",
     green: "#2d6a2e",

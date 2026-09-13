@@ -39,7 +39,7 @@ export default function ResultsPage() {
           <MotionDiv hover shadow className="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
             <h3 className="font-bold text-brand-maroon">Recently Declared Results</h3>
             <ul className="mt-4 space-y-3 text-sm">
-              {["B.Sc. CS – Semester 4 (May 2026)", "B.Com. – Semester 2 (May 2026)", "BCA – Semester 6 (April 2026)"].map((r) => (
+              {["B.Sc. – Semester 4 (May 2026)", "B.Com. – Semester 2 (May 2026)", "BBA – Semester 6 (April 2026)"].map((r) => (
                 <li key={r} className="flex items-center justify-between border-b border-slate-100 pb-3 last:border-0">
                   <span className="text-slate-600">{r}</span>
                   <span className="rounded-full bg-brand-green/15 px-3 py-1 text-xs font-bold text-brand-green">Declared</span>

@@ -5,11 +5,11 @@ import { MotionSection, MotionStagger, MotionCard, MotionItem } from "@/componen
 export const metadata = { title: "Assignments" };
 
 const assignments = [
-  { title: "Assignment 3 – Binary Trees", subject: "Data Structures", due: "20 Jun 2026", status: "Pending" },
+  { title: "Assignment 3 – Marketing Mix Case", subject: "Principles of Management", due: "20 Jun 2026", status: "Pending" },
   { title: "Case Study – Market Analysis", subject: "Business Economics", due: "18 Jun 2026", status: "Submitted" },
   { title: "Essay – Shakespeare's Sonnets", subject: "English Literature", due: "22 Jun 2026", status: "Pending" },
-  { title: "Problem Set – Integration", subject: "Mathematics II", due: "15 Jun 2026", status: "Overdue" },
-  { title: "Project – E-Commerce Website", subject: "Web Development", due: "30 Jun 2026", status: "In Progress" },
+  { title: "Problem Set – Final Accounts", subject: "Financial Accounting", due: "15 Jun 2026", status: "Overdue" },
+  { title: "Project – Business Plan", subject: "Entrepreneurship", due: "30 Jun 2026", status: "In Progress" },
 ];
 
 const statusColors: Record<string, string> = {

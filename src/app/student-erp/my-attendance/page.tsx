@@ -1,9 +1,9 @@
 import ErpContentPage from "@/components/student-erp/ErpContentPage";
 
 const attendance = [
-  { subject: "Data Structures", held: 42, attended: 38, percent: "90.5%" },
-  { subject: "Mathematics II", held: 40, attended: 36, percent: "90.0%" },
-  { subject: "English Literature", held: 38, attended: 35, percent: "92.1%" },
+  { subject: "Principles of Management", held: 42, attended: 38, percent: "90.5%" },
+  { subject: "Financial Accounting", held: 40, attended: 36, percent: "90.0%" },
+  { subject: "Business Communication", held: 38, attended: 35, percent: "92.1%" },
 ];
 
 export default function Page() {

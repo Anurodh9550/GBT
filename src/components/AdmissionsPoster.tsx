@@ -46,8 +46,8 @@ export default function AdmissionsPoster() {
                   Session <span className="text-brand-orange">{siteConfig.admissionBatch}</span>
                 </h3>
                 <ul className="space-y-0.5 text-[11px] text-white/80 sm:text-xs">
-                  <li>• B.Tech · BCA · B.Com · MBA</li>
-                  <li>• M.Tech · M.A · Diploma Programs</li>
+                  <li>• BDS · D-Pharma · Paramedical · Veterinary</li>
+                  <li>• B.Com · BBA · MBA · M.A</li>
                 </ul>
               </div>
               <div className="space-y-2 sm:text-right">
@@ -56,7 +56,7 @@ export default function AdmissionsPoster() {
                   <p className="font-serif text-lg font-bold text-white">31 July 2026</p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white transition group-hover:text-brand-orange sm:justify-end">
-                  Apply Now →
+                  Register Now for Admission →
                 </span>
               </div>
             </div>

@@ -1,9 +1,9 @@
 import ErpContentPage from "@/components/student-erp/ErpContentPage";
 
 const lectures = [
-  { subject: "Data Structures", faculty: "Dr. Priya Singh", day: "Mon, Wed, Fri", time: "10:00 AM – 11:00 AM", room: "Lab 201" },
-  { subject: "Mathematics II", faculty: "Prof. Suresh Patel", day: "Daily", time: "9:00 AM – 10:00 AM", room: "Room 105" },
-  { subject: "English Literature", faculty: "Dr. Kavita Rao", day: "Mon, Wed", time: "2:00 PM – 3:00 PM", room: "Room 302" },
+  { subject: "Principles of Management", faculty: "Dr. Priya Singh", day: "Mon, Wed, Fri", time: "10:00 AM – 11:00 AM", room: "Room 201" },
+  { subject: "Financial Accounting", faculty: "Prof. Anil Kumar", day: "Tue, Thu", time: "11:00 AM – 12:00 PM", room: "Room 105" },
+  { subject: "Business Communication", faculty: "Ms. Neha Verma", day: "Wed", time: "2:00 PM – 3:00 PM", room: "Room 302" },
 ];
 
 export default function Page() {

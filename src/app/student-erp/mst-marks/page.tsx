@@ -1,9 +1,9 @@
 import ErpContentPage from "@/components/student-erp/ErpContentPage";
 
 const marks = [
-  { subject: "Data Structures", mst1: 18, mst2: 16, max: 20 },
-  { subject: "Mathematics II", mst1: 15, mst2: 17, max: 20 },
-  { subject: "English Literature", mst1: 19, mst2: 18, max: 20 },
+  { subject: "Principles of Management", mst1: 18, mst2: 16, max: 20 },
+  { subject: "Financial Accounting", mst1: 15, mst2: 17, max: 20 },
+  { subject: "Business Communication", mst1: 19, mst2: 18, max: 20 },
 ];
 
 export default function Page() {

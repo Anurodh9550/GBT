@@ -363,14 +363,16 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
               </Link>
             );
           })}
-          <Link
-            href="/admissions"
-            onClick={onClose}
-            className="btn-apply text-btn mt-5 flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-white"
-          >
-            Apply Now
-            <span aria-hidden="true">→</span>
-          </Link>
+          <div className="mt-5 flex flex-col gap-3">
+            <Link
+              href={siteConfig.enquiryFormUrl}
+              onClick={onClose}
+              className="btn-apply text-btn flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-white"
+            >
+              {siteConfig.enquiryCtaLabel}
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </nav>
       </div>
     </>
@@ -416,7 +418,7 @@ export function HeaderMain() {
               />
             </div>
             <div className="hidden min-w-0 sm:block">
-              <p className="truncate font-serif text-[15px] font-bold leading-tight text-brand-maroon lg:text-base">
+              <p className="max-w-[10.5rem] font-serif text-[13px] font-bold leading-snug text-brand-maroon sm:max-w-[13rem] lg:max-w-[15.5rem] lg:text-[15px]">
                 {siteConfig.name}
               </p>
               <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-neutral-400 lg:text-[10px]">
@@ -429,10 +431,10 @@ export function HeaderMain() {
 
           <div className="flex shrink-0 items-center gap-2">
             <Link
-              href="/admissions"
-              className="btn-apply text-btn hidden items-center gap-2 rounded-full px-5 py-2.5 text-white sm:inline-flex"
+              href={siteConfig.enquiryFormUrl}
+              className="btn-apply text-btn hidden items-center gap-2 rounded-full px-4 py-2.5 text-white sm:inline-flex lg:px-5"
             >
-              Apply Now
+              {siteConfig.enquiryCtaLabel}
               <span className="text-base leading-none" aria-hidden="true">→</span>
             </Link>
             <button

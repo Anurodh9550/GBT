@@ -4,11 +4,11 @@ import { MotionSection, MotionDiv } from "@/components/motion";
 export const metadata = { title: "Study Materials" };
 
 const materials = [
-  { title: "Computer Science – Semester 4", type: "PDF Notes", subject: "Data Structures", size: "2.4 MB", date: "12 Jun 2026" },
+  { title: "BDS – Clinical Notes", type: "PDF Notes", subject: "Oral Pathology", size: "2.4 MB", date: "12 Jun 2026" },
   { title: "Commerce – Semester 2", type: "Video Lecture", subject: "Financial Accounting", size: "45 min", date: "10 Jun 2026" },
   { title: "English – Semester 1", type: "PDF Notes", subject: "Prose & Poetry", size: "1.8 MB", date: "08 Jun 2026" },
-  { title: "Mathematics – Semester 3", type: "Practice Sheet", subject: "Calculus", size: "890 KB", date: "05 Jun 2026" },
-  { title: "BCA – Semester 5", type: "Lab Manual", subject: "Web Development", size: "3.1 MB", date: "01 Jun 2026" },
+  { title: "BBA – Semester 3", type: "Practice Sheet", subject: "Business Statistics", size: "890 KB", date: "05 Jun 2026" },
+  { title: "D-Pharma – Semester 2", type: "Lab Manual", subject: "Pharmaceutics", size: "3.1 MB", date: "01 Jun 2026" },
   { title: "General – All Students", type: "Syllabus", subject: "Academic Calendar 2026-27", size: "520 KB", date: "28 May 2026" },
 ];
 

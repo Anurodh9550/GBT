@@ -24,7 +24,7 @@ export default function DepartmentsPage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading eyebrow="Academic Programs" title="Our Departments" />
             <Link href="/admissions" className="btn-outline-maroon">
-              Apply Now →
+              Register Now for Admission →
             </Link>
           </div>
           <MotionStagger className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
