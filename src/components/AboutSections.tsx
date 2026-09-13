@@ -76,13 +76,18 @@ function AboutBlock({
               Read More
             </Link>
             {showPhone && (
-              <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black hover:text-brand-orange"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">📞</span>
-                {siteConfig.phone}
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                {siteConfig.phones.map((phone) => (
+                  <a
+                    key={phone}
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black hover:text-brand-orange"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">📞</span>
+                    {phone}
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -171,15 +176,16 @@ function AboutBlock({
               <span aria-hidden>→</span>
             </Link>
             {showPhone && (
-              <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                className="about-btn-secondary"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-maroon/8 text-brand-maroon">
-                  📞
-                </span>
-                {siteConfig.phone}
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                {siteConfig.phones.map((phone) => (
+                  <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="about-btn-secondary">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-maroon/8 text-brand-maroon">
+                      📞
+                    </span>
+                    {phone}
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </div>

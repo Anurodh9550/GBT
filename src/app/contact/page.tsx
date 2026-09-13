@@ -27,7 +27,13 @@ export default function ContactPage() {
                 <SectionHeading eyebrow="Reach Us" title="Office Address" />
                 <div className="mt-6 space-y-4 text-slate-600">
                   <p>{siteConfig.address}</p>
-                  <p><a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="font-medium hover:text-brand-orange">{siteConfig.phone}</a></p>
+                  {siteConfig.phones.map((phone) => (
+                    <p key={phone}>
+                      <a href={`tel:${phone.replace(/\s/g, "")}`} className="font-medium hover:text-brand-orange">
+                        {phone}
+                      </a>
+                    </p>
+                  ))}
                   <p><a href={`mailto:${siteConfig.email}`} className="font-medium hover:text-brand-orange">{siteConfig.email}</a></p>
                 </div>
               </div>

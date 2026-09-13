@@ -4,7 +4,8 @@ export const siteConfig = {
   tagline: "Excellence in Education Since 1998",
   trust: "Gautam Buddha Educational Trust",
   established: "1998",
-  phone: "+91 93126 41500",
+  phone: "+91 99191 61119",
+  phones: ["+91 99191 61119"],
   email: "info@gbtedtrust.edu.in",
   address: "Village Nagara, Post Itahiya, District Jalaun, Uttar Pradesh - 285123",
   mapsEmbedUrl:

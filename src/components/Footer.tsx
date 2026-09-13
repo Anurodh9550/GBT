@@ -106,11 +106,13 @@ export default function Footer() {
             <h3 className="text-eyebrow mb-5 text-brand-orange">Contact</h3>
             <ul className="space-y-3 text-sm font-normal">
               <li>{siteConfig.address}</li>
-              <li>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="hover:text-white">
-                  {siteConfig.phone}
-                </a>
-              </li>
+              {siteConfig.phones.map((phone) => (
+                <li key={phone}>
+                  <a href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-white">
+                    {phone}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href={`mailto:${siteConfig.email}`} className="hover:text-white">
                   {siteConfig.email}
