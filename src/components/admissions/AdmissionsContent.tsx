@@ -73,7 +73,7 @@ export default function AdmissionsContent() {
         <div className="mx-auto max-w-7xl px-4">
             <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-orange/20 bg-brand-orange/5 px-5 py-4">
             <p className="text-sm font-medium text-slate-700">
-              New student? Start your admission registration for session {siteConfig.admissionBatch}.
+              New student? Counseling has started for session {siteConfig.admissionBatch}. Register or visit campus.
             </p>
             <Link href="#official-portal" className="shrink-0 rounded-full border-2 border-brand-orange bg-white px-5 py-2.5 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white">
               {siteConfig.registerCtaLabel} →

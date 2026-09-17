@@ -9,7 +9,7 @@ export default function AdmissionsPage() {
     <>
       <PageHero
         title="Admissions"
-        subtitle={`Applications open for Academic Session ${siteConfig.admissionBatch}`}
+        subtitle={`Counseling has started for Academic Session ${siteConfig.admissionBatch}. Visit campus or enquire online to complete admission.`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Admissions" }]}
       />
       <AdmissionsContent />

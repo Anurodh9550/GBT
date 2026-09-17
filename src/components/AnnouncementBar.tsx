@@ -18,7 +18,7 @@ export default function AnnouncementBar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
           </span>
-          Admissions Open — Batch {siteConfig.admissionBatch}
+          Admissions Open — Counseling Started for Batch {siteConfig.admissionBatch}
         </p>
       </div>
     </motion.div>
