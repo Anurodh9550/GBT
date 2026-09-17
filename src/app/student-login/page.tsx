@@ -61,6 +61,8 @@ export default function StudentLoginPage() {
   return (
     <>
       <PageHero
+        variant="login"
+        tone="orange"
         title="Student Login"
         subtitle="Access your dashboard, classes, assignments, and results"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Student Login" }]}

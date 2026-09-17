@@ -12,6 +12,7 @@ export default function PortalPage() {
   return (
     <>
       <PageHero
+        variant="portal"
         title="Student & Faculty Portal"
         subtitle="Access online classes, study materials, assignments, exams, and results."
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Portal" }]}

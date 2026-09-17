@@ -26,6 +26,7 @@ export default async function DepartmentDetailPage({ params }: Props) {
   return (
     <>
       <PageHero
+        variant="split"
         title={dept.name}
         subtitle={dept.desc}
         breadcrumb={[

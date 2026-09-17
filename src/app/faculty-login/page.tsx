@@ -62,6 +62,8 @@ export default function FacultyLoginPage() {
   return (
     <>
       <PageHero
+        variant="login"
+        tone="green"
         title="Faculty Login"
         subtitle="Faculty & staff portal for classes, attendance, and administration"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Faculty Login" }]}

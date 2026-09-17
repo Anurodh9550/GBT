@@ -26,6 +26,7 @@ export default function NewsEventsPage() {
   return (
     <>
       <PageHero
+        variant="journal"
         title="News & Events"
         subtitle="Stay updated with the latest happenings on campus"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "News & Events" }]}

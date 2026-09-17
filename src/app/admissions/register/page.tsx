@@ -8,6 +8,7 @@ export default function AdmissionRegisterPage() {
   return (
     <>
       <PageHero
+        variant="stripe"
         title="Admission Registration"
         subtitle={`Online registration portal — Session ${siteConfig.admissionBatch}`}
         breadcrumb={[

@@ -10,6 +10,7 @@ export default function AboutTrustPage() {
   return (
     <>
       <PageHero
+        variant="editorial"
         title="About Trust"
         subtitle={`Learn about the vision, mission, and legacy of ${siteConfig.trust}`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "About Trust" }]}

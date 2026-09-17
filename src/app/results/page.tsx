@@ -8,6 +8,8 @@ export default function ResultsPage() {
   return (
     <>
       <PageHero
+        variant="login"
+        tone="maroon"
         title="Results"
         subtitle="Check semester examination results and grade sheets"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Results" }]}

@@ -15,6 +15,8 @@ export default function OnlineExamsPage() {
   return (
     <>
       <PageHero
+        variant="resource"
+        tone="navy"
         title="Online Exams"
         subtitle="Scheduled examinations and online assessment portal"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Online Exams" }]}

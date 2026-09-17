@@ -165,6 +165,7 @@ export default function EnquiryFormPage() {
   return (
     <>
       <PageHero
+        variant="centered"
         title="College Enquiry Form"
         subtitle="Fill this form and our admissions team will contact you"
         breadcrumb={[

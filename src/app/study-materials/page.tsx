@@ -16,6 +16,8 @@ export default function StudyMaterialsPage() {
   return (
     <>
       <PageHero
+        variant="resource"
+        tone="maroon"
         title="Study Materials"
         subtitle="Download notes, lectures, and academic resources"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Study Materials" }]}

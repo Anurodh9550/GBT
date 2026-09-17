@@ -8,6 +8,7 @@ export default function AdmissionsPage() {
   return (
     <>
       <PageHero
+        variant="maroon"
         title="Admissions"
         subtitle={`Counseling has started for Academic Session ${siteConfig.admissionBatch}. Visit campus or enquire online to complete admission.`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Admissions" }]}

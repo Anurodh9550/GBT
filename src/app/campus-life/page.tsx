@@ -171,6 +171,7 @@ export default function CampusLifePage() {
   return (
     <>
       <PageHero
+        variant="photo"
         title="Campus Life"
         subtitle="Green lawns, a close-knit student community, and a campus built for learning — this is everyday life at Gautam Buddha College of Education."
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Campus Life" }]}

@@ -23,6 +23,8 @@ export default function AssignmentsPage() {
   return (
     <>
       <PageHero
+        variant="resource"
+        tone="green"
         title="Assignments"
         subtitle="View, submit, and track your academic assignments"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Assignments" }]}

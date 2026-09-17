@@ -145,6 +145,7 @@ export default function PlacementsPage() {
   return (
     <>
       <PageHero
+        variant="career"
         title="Placements & Careers"
         subtitle="Hospital internships, dental clinics, pharmacies, diagnostic labs, and pharma partners — healthcare careers after GBCE."
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Placements" }]}

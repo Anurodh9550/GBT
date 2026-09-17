@@ -11,6 +11,7 @@ export default function DepartmentsPage() {
   return (
     <>
       <PageHero
+        variant="split"
         title="Our Departments"
         subtitle="Discover our wide range of academic departments designed for the modern world."
         breadcrumb={[

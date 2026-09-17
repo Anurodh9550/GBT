@@ -16,6 +16,8 @@ export default function OnlineClassesPage() {
   return (
     <>
       <PageHero
+        variant="resource"
+        tone="orange"
         title="Online Classes"
         subtitle="Join live virtual classrooms and access recorded sessions"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Online Classes" }]}

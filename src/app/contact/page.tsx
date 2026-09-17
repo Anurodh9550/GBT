@@ -15,6 +15,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        variant="contact"
         title="Contact Us"
         subtitle="Get in touch with our office for admissions, queries, and support"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]}

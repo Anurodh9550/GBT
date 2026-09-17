@@ -11,6 +11,8 @@ export default function AcademicsPage() {
   return (
     <>
       <PageHero
+        variant="academic"
+        image="/gallery/campus-entrance.png"
         title="Academic Excellence"
         subtitle="Explore our diverse range of undergraduate and postgraduate programs designed to equip you with future-ready skills."
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Academics" }]}

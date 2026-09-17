@@ -8,6 +8,7 @@ export default function GalleryPage() {
   return (
     <>
       <PageHero
+        variant="mosaic"
         title="Gallery"
         subtitle="Explore life at our campus through our photo gallery"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Gallery" }]}

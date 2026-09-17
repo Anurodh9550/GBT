@@ -12,6 +12,7 @@ export default function CoursesPage() {
   return (
     <>
       <PageHero
+        variant="academic"
         title="Our Courses"
         subtitle="Explore our diverse academic programs designed for career success"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Courses" }]}
