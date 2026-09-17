@@ -17,14 +17,19 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gbcollege.org"),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.shortName}`,
   },
   description: `${siteConfig.trust} - ${siteConfig.tagline}. Admissions open for UG & PG courses at ${siteConfig.name}.`,
   icons: {
-    icon: siteConfig.logo,
-    apple: siteConfig.logo,
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo.png", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 };
 

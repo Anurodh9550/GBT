@@ -51,10 +51,10 @@ export default function ContactPage() {
               <div className="rounded-2xl bg-brand-black p-6 text-white">
                 <h3 className="font-bold text-brand-orange">Departments</h3>
                 <ul className="mt-3 space-y-2 text-sm text-slate-300">
-                  <li>Admissions: admissions@gbtedtrust.edu.in</li>
-                  <li>Examination: exam@gbtedtrust.edu.in</li>
-                  <li>Accounts: accounts@gbtedtrust.edu.in</li>
-                  <li>IT Support: it@gbtedtrust.edu.in</li>
+                  <li>Admissions: admissions@gbcollege.org</li>
+                  <li>Examination: exam@gbcollege.org</li>
+                  <li>Accounts: accounts@gbcollege.org</li>
+                  <li>IT Support: it@gbcollege.org</li>
                 </ul>
               </div>
             </div>

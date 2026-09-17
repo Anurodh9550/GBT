@@ -6,7 +6,8 @@ export const siteConfig = {
   established: "1998",
   phone: "+91 99191 61119",
   phones: ["+91 99191 61119"],
-  email: "info@gbtedtrust.edu.in",
+  email: "info@gbcollege.org",
+  emails: ["info@gbcollege.org"],
   address: "Village Nagara, Post Itahiya, District Jalaun, Uttar Pradesh - 285123",
   mapsEmbedUrl:
     "https://maps.google.com/maps?q=Village%20Nagara%2C%20Post%20Itahiya%2C%20District%20Jalaun%2C%20Uttar%20Pradesh%20285123&z=15&output=embed",
