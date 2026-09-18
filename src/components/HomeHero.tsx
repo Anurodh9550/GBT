@@ -55,7 +55,7 @@ export default function HomeHero() {
   return (
     <section className="bg-white">
       <div className="grid lg:grid-cols-2">
-        <div className="flex flex-col justify-center bg-brand-maroon-dark px-4 py-14 text-white sm:px-10 lg:px-14 lg:py-16">
+        <div className="flex flex-col justify-center bg-gradient-to-r from-brand-maroon-dark to-brand-maroon px-4 py-14 text-white sm:px-10 lg:px-14 lg:py-16">
           <MotionStagger animateOnMount className="mx-auto w-full max-w-xl lg:mx-0">
             <MotionDiv variant="fadeUp">
               <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-orange">

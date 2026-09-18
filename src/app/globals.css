@@ -193,6 +193,26 @@ h1, h2, h3, h4 {
   animation: scroll-bounce 2s ease-in-out infinite;
 }
 
+@keyframes announcement-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.announcement-marquee {
+  animation: announcement-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.announcement-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-marquee {
+    animation: none;
+  }
+}
+
 .section-padding {
   @apply py-20 lg:py-24;
 }
