@@ -1,15 +1,16 @@
 import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import HomeAbout from "@/components/HomeAbout";
+import HomeStatsRow from "@/components/HomeStatsRow";
 import OurCoursesSection from "@/components/OurCoursesSection";
 import SectionHeading from "@/components/SectionHeading";
-import GalleryImageCard from "@/components/GalleryImageCard";
 import FeatureIcon from "@/components/FeatureIcon";
+import DepartmentIcon from "@/components/DepartmentIcon";
 import PortalIcon, { portalIconIdFromLabel } from "@/components/PortalIcon";
 import CTABanner from "@/components/CTABanner";
 import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
 import { siteConfig } from "@/lib/site-config";
-import { whyChoose, testimonials, newsItems, galleryPreview } from "@/lib/site-data";
+import { whyChoose, testimonials, newsItems, departments } from "@/lib/site-data";
 
 const portalQuick = [
   { label: "Student Login", href: "/student-login" },
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <>
       <HomeHero />
+      <HomeStatsRow />
       <HomeAbout />
       <OurCoursesSection limit={6} />
 
@@ -29,14 +31,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
             eyebrow={`Why Choose ${siteConfig.shortName}`}
-            title="A campus built for learning"
-            subtitle="Clinical training, experienced faculty, and affordable programmes for students from Jalaun and nearby districts."
+            title="Training that prepares you for practice"
+            subtitle="Clinical labs, experienced faculty, and affordable programmes in healthcare, pharmacy, commerce and management."
             align="center"
           />
           <MotionStagger className="mt-12 grid gap-6 md:grid-cols-3">
             {whyChoose.map((item) => (
               <MotionCard key={item.title}>
-                <div className="card-surface p-8">
+                <div className="card-surface h-full p-8">
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/10">
                     <FeatureIcon id={item.icon} />
                   </div>
@@ -52,21 +54,28 @@ export default function Home() {
       <MotionSection className="section-padding bg-white">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
-            eyebrow="Campus"
-            title="Life at GBCE"
-            subtitle="The academic block, lawns and campus gate at Village Nagara, Jalaun."
+            eyebrow="Academics"
+            title="Our Departments"
+            subtitle="Healthcare, pharmacy, commerce and management streams at Gautam Buddha College of Education."
             align="center"
           />
-          <MotionStagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryPreview.map((item) => (
-              <MotionCard key={item.title}>
-                <GalleryImageCard item={item} />
+          <MotionStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {departments.map((dept) => (
+              <MotionCard key={dept.slug}>
+                <Link href={`/departments/${dept.slug}`} className="card-surface-interactive block h-full p-6">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange/10">
+                    <DepartmentIcon id={dept.icon} className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-serif text-lg font-bold text-brand-maroon">{dept.name}</h3>
+                  <p className="mt-1 text-xs font-semibold text-brand-orange">{dept.duration}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{dept.desc}</p>
+                </Link>
               </MotionCard>
             ))}
           </MotionStagger>
           <div className="mt-10 text-center">
-            <Link href="/gallery" className="btn-maroon">
-              View Full Gallery →
+            <Link href="/departments" className="btn-maroon">
+              All Departments →
             </Link>
           </div>
         </div>

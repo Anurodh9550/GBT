@@ -194,7 +194,6 @@ export const galleryPreview: GalleryItem[] = [
   { title: "Campus Lawn", image: "/gallery/campus-lawn.png", category: "Campus" },
   { title: "College Approach", image: "/gallery/campus-approach.png", category: "Campus" },
   { title: "Campus Gate", image: "/gallery/campus-gate-wide.png", category: "Campus" },
-  { title: "College Main Gate", image: "/gallery/campus-gate.png", category: "Campus" },
 ];
 
 export const aboutContent = {

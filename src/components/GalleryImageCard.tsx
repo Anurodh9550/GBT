@@ -3,20 +3,27 @@ import type { GalleryItem } from "@/lib/site-data";
 
 type GalleryImageCardProps = {
   item: GalleryItem;
-  aspect?: "16/10" | "4/3";
+  aspect?: "16/10" | "4/3" | "auto";
+  className?: string;
   showCategoryOnHover?: boolean;
 };
 
 export default function GalleryImageCard({
   item,
   aspect = "16/10",
+  className = "",
   showCategoryOnHover = false,
 }: GalleryImageCardProps) {
-  const aspectClass = aspect === "4/3" ? "aspect-[4/3]" : "aspect-[16/10]";
+  const aspectClass =
+    aspect === "4/3"
+      ? "aspect-[4/3]"
+      : aspect === "auto"
+        ? "h-full min-h-[240px]"
+        : "aspect-[16/10]";
 
   return (
     <div
-      className={`group relative ${aspectClass} overflow-hidden rounded-2xl bg-slate-200 shadow-sm`}
+      className={`group relative ${aspectClass} overflow-hidden rounded-2xl bg-slate-200 shadow-sm ${className}`}
     >
       <Image
         src={item.image}
