@@ -12,7 +12,7 @@ export default function AdmissionsPoster() {
       >
         <div className="relative aspect-[16/11] sm:aspect-[16/10]">
           <Image
-            src="/gallery/campus-building.png"
+            src="/gallery/academic-block.png"
             alt={`${siteConfig.name} campus`}
             fill
             className="object-cover object-center transition duration-700 group-hover:scale-105"

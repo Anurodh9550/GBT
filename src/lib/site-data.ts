@@ -132,10 +132,10 @@ export const whyStudyHere = [
 ];
 
 export const campusHighlights = [
-  { value: "50+", label: "Modern Classrooms" },
-  { value: "10+", label: "Specialized Labs" },
-  { value: "5000+", label: "Library Books" },
-  { value: "100+", label: "Industry Partners" },
+  { value: "25+", label: "Years of Service" },
+  { value: "8+", label: "Academic Programmes" },
+  { value: "4", label: "Healthcare Streams" },
+  { value: "1998", label: "Established" },
 ];
 
 export const testimonials = [
@@ -158,7 +158,7 @@ export const testimonials = [
 
 export const newsItems = [
   { date: "15 Jun 2026", title: "Annual Convocation 2026 Announced", tag: "Event", href: "/news-events" },
-  { date: "10 Jun 2026", title: "Campus Placement Drive – Top Recruiters", tag: "Placement", href: "/news-events" },
+  { date: "10 Jun 2026", title: "Hospital Internship & Clinical Training Update", tag: "Training", href: "/news-events" },
   { date: "05 Jun 2026", title: "Admission Open for Session 2026-27", tag: "Admission", href: "/admissions" },
 ];
 
@@ -188,18 +188,25 @@ export const galleryItems: GalleryItem[] = [
   { title: "Football Ground", image: "/gallery/football.jpg", category: "Sports" },
 ];
 
-export const galleryPreview = galleryItems.slice(0, 6);
+export const galleryPreview: GalleryItem[] = [
+  { title: "Main Academic Block", image: "/gallery/academic-block.png", category: "Campus" },
+  { title: "Campus Entrance", image: "/gallery/campus-entrance.png", category: "Campus" },
+  { title: "Campus Lawn", image: "/gallery/campus-lawn.png", category: "Campus" },
+  { title: "College Approach", image: "/gallery/campus-approach.png", category: "Campus" },
+  { title: "Campus Gate", image: "/gallery/campus-gate-wide.png", category: "Campus" },
+  { title: "College Main Gate", image: "/gallery/campus-gate.png", category: "Campus" },
+];
 
 export const aboutContent = {
   intro: {
-    eyebrow: "About Us",
-    title: "Our University",
+    eyebrow: siteConfig.name,
+    title: "Our College",
     paragraphs: [
-      `${siteConfig.trust} is committed to bringing quality education to students across urban and rural communities. Through ${siteConfig.name}, we provide affordable programs, modern infrastructure, and skilled faculty that help every learner build a brighter future.`,
-      "Our trust is registered under the Societies Registration Act and works with government skill-development initiatives to offer industry-relevant training, ethical values, and lifelong learning opportunities for youth nationwide.",
+      `${siteConfig.name} is committed to bringing quality education to students across urban and rural communities. Under ${siteConfig.trust}, we provide affordable programs, modern infrastructure, and skilled faculty that help every learner build a brighter future.`,
+      "Our college is registered under the Societies Registration Act and works with government skill-development initiatives to offer industry-relevant training, ethical values, and lifelong learning opportunities for youth nationwide.",
     ],
-    image: "/about/knowledge-power.jpg",
-    badge: "About GBCE",
+    image: "/gallery/campus-approach.png",
+    badge: "Our Campus",
   },
   mission: {
     title: "Our Mission",
@@ -208,8 +215,8 @@ export const aboutContent = {
       "Our aim is to create lifelong learners who embrace diversity, seek knowledge, and contribute positively to the betterment of society.",
     ],
     tagline: `Best Education For ${siteConfig.trust}`,
-    image: "/about/mission.jpg",
-    badge: "About GBCE",
+    image: "/courses/d-pharma.jpg",
+    badge: "Our Mission",
   },
   vision: {
     title: "Our Vision",
@@ -218,8 +225,8 @@ export const aboutContent = {
       "Through innovative teaching methodologies and a commitment to academic excellence, we envision a future where our graduates emerge as compassionate leaders, critical thinkers, and catalysts for positive change.",
     ],
     tagline: `Best Education For ${siteConfig.trust}`,
-    image: "/about/vision.jpg",
-    badge: "About GBCE",
+    image: "/courses/bba.jpg",
+    badge: "Our Vision",
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   admissionCourseTabs,
   admissionProcessSteps,
@@ -9,7 +10,6 @@ import {
 import { siteConfig } from "@/lib/site-config";
 import AdmissionPortalCard from "@/components/admissions/AdmissionPortalCard";
 import { MotionSection, MotionDiv } from "@/components/motion";
-import Link from "next/link";
 
 function CriterionIcon({ type }: { type: "document" | "medal" | "check" }) {
   const cn = "h-5 w-5 text-brand-orange";
@@ -35,7 +35,6 @@ function CriterionIcon({ type }: { type: "document" | "medal" | "check" }) {
 }
 
 function StepIcon({ type }: { type: "form" | "counsel" | "docs" | "payment" }) {
-  const wrap = "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange/10";
   const cn = "h-5 w-5 text-brand-orange";
   const icons = {
     form: (
@@ -59,7 +58,7 @@ function StepIcon({ type }: { type: "form" | "counsel" | "docs" | "payment" }) {
       </svg>
     ),
   };
-  return <span className={wrap}>{icons[type]}</span>;
+  return icons[type];
 }
 
 export default function AdmissionsContent() {
@@ -68,23 +67,17 @@ export default function AdmissionsContent() {
 
   return (
     <>
-      {/* Eligibility */}
       <MotionSection className="section-padding bg-white">
         <div className="mx-auto max-w-7xl px-4">
-            <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-orange/20 bg-brand-orange/5 px-5 py-4">
-            <p className="text-sm font-medium text-slate-700">
-              New student? Counseling has started for session {siteConfig.admissionBatch}. Register or visit campus.
-            </p>
-            <Link href="#official-portal" className="shrink-0 rounded-full border-2 border-brand-orange bg-white px-5 py-2.5 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white">
-              {siteConfig.registerCtaLabel} →
-            </Link>
-          </div>
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <p className="text-eyebrow text-brand-orange">Eligibility Criteria</p>
-              <h2 className="mt-3 font-serif text-3xl font-bold text-brand-black sm:text-4xl">
-                Who Should <span className="text-brand-orange">Apply?</span>
+              <h2 className="mt-3 font-serif text-3xl font-bold text-brand-maroon sm:text-4xl">
+                Who Should Apply?
               </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+                Choose a programme to see the academic requirements for session {siteConfig.admissionBatch}.
+              </p>
 
               <div className="mt-8 flex flex-wrap gap-2">
                 {admissionCourseTabs.map((tab) => (
@@ -92,7 +85,7 @@ export default function AdmissionsContent() {
                     key={tab.id}
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
-                    className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       activeTab === tab.id
                         ? "bg-brand-orange text-white shadow-md"
                         : "border border-slate-200 bg-white text-slate-600 hover:border-brand-orange hover:text-brand-orange"
@@ -103,8 +96,9 @@ export default function AdmissionsContent() {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8">
-                <ul className="space-y-5">
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-8">
+                <p className="text-sm font-bold text-brand-maroon">{activeCourse.label}</p>
+                <ul className="mt-5 space-y-5">
                   {activeCourse.criteria.map((item) => (
                     <li key={item.text} className="flex gap-4">
                       <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
@@ -125,70 +119,42 @@ export default function AdmissionsContent() {
         </div>
       </MotionSection>
 
-      {/* Application Process */}
       <MotionSection className="section-padding bg-slate-50">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-10 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <p className="text-eyebrow text-brand-orange">How to Apply</p>
-              <h2 className="mt-3 font-serif text-3xl font-bold text-brand-black sm:text-4xl">
-                Application Process
-              </h2>
+          <p className="text-eyebrow text-brand-orange">How to Apply</p>
+          <h2 className="mt-3 font-serif text-3xl font-bold text-brand-maroon sm:text-4xl">
+            Application Process
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+            Four steps from registration to seat confirmation — counseling is already open on campus.
+          </p>
 
-              <div className="mt-10 space-y-6">
-                {admissionProcessSteps.map((step) => (
-                  <MotionDiv
-                    key={step.step}
-                    hover
-                    shadow
-                    className="flex gap-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6"
-                  >
-                    <StepIcon type={step.icon} />
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-widest text-brand-orange">
-                        {step.step}
-                      </p>
-                      <h3 className="mt-1 font-serif text-lg font-bold text-brand-black">
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.desc}</p>
-                    </div>
-                  </MotionDiv>
-                ))}
-              </div>
-
-              <a
-                href={siteConfig.admissionFormPdf}
-                download="GBCE-Admission-Form.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-brand-orange px-6 py-3 text-sm font-bold text-brand-orange transition hover:bg-brand-orange hover:text-white"
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {admissionProcessSteps.map((step) => (
+              <MotionDiv
+                key={step.step}
+                hover
+                shadow
+                className="rounded-2xl border border-slate-200 bg-white p-6"
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Download Admission Form (PDF)
-              </a>
-            </div>
-            <div className="hidden lg:block">
-              <AdmissionPortalCard />
-            </div>
+                <div className="flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-orange/10">
+                    <StepIcon type={step.icon} />
+                  </span>
+                  <span className="font-serif text-2xl font-bold text-brand-maroon/15">{step.step}</span>
+                </div>
+                <h3 className="mt-5 font-serif text-lg font-bold text-brand-maroon">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.desc}</p>
+              </MotionDiv>
+            ))}
           </div>
         </div>
       </MotionSection>
 
-      {/* Apply Form + Documents */}
       <MotionSection id="apply-form" className="section-padding scroll-mt-28 bg-white">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-10 rounded-2xl border border-brand-orange/30 bg-brand-orange/5 p-6 text-center sm:p-8">
-            <p className="text-lg font-bold text-brand-maroon sm:text-xl">
-              Last Date to Apply: <span className="text-brand-orange">31 July 2026</span>
-            </p>
-            <p className="mt-2 text-sm text-slate-600">Limited seats — apply early to secure your place</p>
-          </div>
-
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 sm:p-8">
               <p className="text-eyebrow text-brand-orange">Documents</p>
               <h3 className="mt-2 font-serif text-2xl font-bold text-brand-maroon">Required Documents</h3>
               <ul className="mt-6 space-y-3">
@@ -203,35 +169,29 @@ export default function AdmissionsContent() {
                 download="GBCE-Admission-Form.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-maroon px-4 py-3 text-sm font-bold text-white transition hover:bg-brand-maroon-dark"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-maroon hover:text-brand-orange"
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Download Full Form — See What&apos;s Needed (PDF)
+                Download full form (PDF) →
               </a>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-lg">
-              <p className="text-eyebrow text-brand-orange">Apply Online</p>
-              <h3 className="mt-2 font-serif text-2xl font-bold text-brand-maroon">Start Your Application</h3>
-              <p className="mt-3 text-sm text-slate-600">
-                Use the Official Admission Portal card above to open the full registration form.
+
+            <div className="rounded-2xl bg-brand-maroon p-7 text-white sm:p-8">
+              <p className="text-eyebrow text-brand-orange">Apply Now</p>
+              <h3 className="mt-2 font-serif text-2xl font-bold">Last date: 31 July 2026</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                Limited seats. Register online, then complete counseling and document verification at campus.
               </p>
-              <Link
-                href="#official-portal"
-                className="mt-6 block w-full rounded-full bg-brand-orange py-3.5 text-center font-bold text-white transition hover:bg-brand-orange-light"
-              >
-                Go to Registration Portal →
+              <Link href={siteConfig.admissionRegisterUrl} className="btn-primary mt-6">
+                {siteConfig.ctaRegisterLabel} →
               </Link>
-              <a
-                href={siteConfig.admissionFormPdf}
-                download="GBCE-Admission-Form.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 block text-center text-sm font-medium text-brand-orange hover:underline"
-              >
-                Or download the registration form (PDF)
-              </a>
+              <div className="mt-6 space-y-2 border-t border-white/15 pt-5 text-sm">
+                <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="block font-semibold text-white hover:text-brand-orange">
+                  {siteConfig.phone}
+                </a>
+                <a href={`mailto:${siteConfig.email}`} className="block text-white/70 hover:text-white">
+                  {siteConfig.email}
+                </a>
+              </div>
             </div>
           </div>
         </div>

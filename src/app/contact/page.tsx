@@ -1,5 +1,8 @@
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
+import ContactMessageForm from "@/components/ContactMessageForm";
+import CTABanner from "@/components/CTABanner";
 import { MotionSection, MotionDiv } from "@/components/motion";
 import { siteConfig } from "@/lib/site-config";
 
@@ -11,85 +14,117 @@ const officeHours = [
   { day: "Sunday & Holidays", time: "Closed" },
 ];
 
+const contactCards = [
+  {
+    label: "Campus Address",
+    value: siteConfig.address,
+    href: "#campus-map",
+    action: "View on map",
+  },
+  {
+    label: "Phone",
+    value: siteConfig.phone,
+    href: `tel:${siteConfig.phone.replace(/\s/g, "")}`,
+    action: "Call office",
+  },
+  {
+    label: "Email",
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}`,
+    action: "Send email",
+  },
+];
+
 export default function ContactPage() {
   return (
     <>
       <PageHero
         variant="contact"
         title="Contact Us"
-        subtitle="Get in touch with our office for admissions, queries, and support"
+        subtitle={`Visit ${siteConfig.name}, call the office, or send a message. Counseling is open for session ${siteConfig.admissionBatch}.`}
+        image="/gallery/campus-entrance.png"
+        imageAlt={`${siteConfig.name} campus entrance`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
+
       <MotionSection className="section-padding bg-white">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div className="space-y-6">
-              <div className="card-surface bg-slate-50 p-8">
-                <SectionHeading eyebrow="Reach Us" title="Office Address" />
-                <div className="mt-6 space-y-4 text-slate-600">
-                  <p>{siteConfig.address}</p>
-                  {siteConfig.phones.map((phone) => (
-                    <p key={phone}>
-                      <a href={`tel:${phone.replace(/\s/g, "")}`} className="font-medium hover:text-brand-orange">
-                        {phone}
-                      </a>
-                    </p>
-                  ))}
-                  <p><a href={`mailto:${siteConfig.email}`} className="font-medium hover:text-brand-orange">{siteConfig.email}</a></p>
-                </div>
-              </div>
-              <div className="card-surface p-8">
-                <h3 className="font-bold text-brand-maroon">Office Hours</h3>
-                <ul className="mt-4 space-y-3">
-                  {officeHours.map((h) => (
-                    <li key={h.day} className="flex justify-between text-sm">
-                      <span className="text-slate-600">{h.day}</span>
-                      <span className="font-semibold text-brand-maroon">{h.time}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl bg-brand-black p-6 text-white">
-                <h3 className="font-bold text-brand-orange">Departments</h3>
-                <ul className="mt-3 space-y-2 text-sm text-slate-300">
-                  <li>Admissions: admissions@gbcollege.org</li>
-                  <li>Examination: exam@gbcollege.org</li>
-                  <li>Accounts: accounts@gbcollege.org</li>
-                  <li>IT Support: it@gbcollege.org</li>
-                </ul>
-              </div>
-            </div>
-            <div className="card-surface p-8">
-              <SectionHeading eyebrow="Message" title="Send a Message" subtitle="Our office team will respond within 24 hours." />
-              <form className="mt-8 space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input type="text" placeholder="Your Name" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange" />
-                  <input type="email" placeholder="Email Address" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange" />
-                </div>
-                <input type="tel" placeholder="Phone Number" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange" />
-                <select className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none">
-                  <option>Select Department</option>
-                  <option>Admissions</option>
-                  <option>Examination</option>
-                  <option>Accounts & Fees</option>
-                  <option>General Inquiry</option>
-                </select>
-                <textarea rows={5} placeholder="Your Message" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange" />
-                <button type="submit" className="btn-primary w-full justify-center">Send Message</button>
-              </form>
-            </div>
+          <SectionHeading
+            eyebrow="Reach Us"
+            title="College Office"
+            subtitle="The admissions desk and college office are on campus at Village Nagara, Jalaun."
+          />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {contactCards.map((card) => (
+              <MotionDiv key={card.label} hover shadow className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-orange">{card.label}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-700">{card.value}</p>
+                <a href={card.href} className="mt-4 inline-flex text-sm font-bold text-brand-maroon hover:text-brand-orange">
+                  {card.action} →
+                </a>
+              </MotionDiv>
+            ))}
           </div>
-          <MotionDiv shadow className="card-surface mt-12 overflow-hidden">
-            <iframe
-              title={`${siteConfig.name} campus location`}
-              src={siteConfig.mapsEmbedUrl}
-              className="aspect-[21/9] w-full min-h-[280px] border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </MotionDiv>
         </div>
       </MotionSection>
+
+      <MotionSection id="campus-map" className="section-padding scroll-mt-28 bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+            <div className="rounded-2xl border border-slate-200 bg-white p-7 sm:p-8">
+              <p className="text-eyebrow text-brand-orange">Office Hours</p>
+              <h2 className="mt-2 font-serif text-2xl font-bold text-brand-maroon">When to visit</h2>
+              <ul className="mt-6 space-y-4">
+                {officeHours.map((h) => (
+                  <li key={h.day} className="flex items-center justify-between gap-4 border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                    <span className="text-sm text-slate-600">{h.day}</span>
+                    <span className="text-sm font-semibold text-brand-maroon">{h.time}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm leading-relaxed text-slate-600">
+                For admissions counseling, register online first or walk in during office hours with your documents.
+              </p>
+              <Link href={siteConfig.admissionRegisterUrl} className="btn-primary mt-6">
+                {siteConfig.ctaRegisterLabel} →
+              </Link>
+            </div>
+            <MotionDiv shadow className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+              <iframe
+                title={`${siteConfig.name} campus location`}
+                src={siteConfig.mapsEmbedUrl}
+                className="h-full min-h-[320px] w-full border-0 lg:min-h-[420px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </MotionDiv>
+          </div>
+        </div>
+      </MotionSection>
+
+      <MotionSection className="section-padding bg-white">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+            <SectionHeading
+              eyebrow="Message"
+              title="Send a Message"
+              subtitle="Write to the college office. For course counselling, use the enquiry form."
+            />
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <ContactMessageForm />
+            </div>
+          </div>
+        </div>
+      </MotionSection>
+
+      <CTABanner
+        title="Prefer to enquire for admission?"
+        subtitle="Fill the college enquiry form and the admissions team will call you back."
+        primaryLabel={`${siteConfig.enquiryCtaLabel} →`}
+        primaryHref={siteConfig.enquiryFormUrl}
+        secondaryLabel="Register Now"
+        secondaryHref={siteConfig.admissionRegisterUrl}
+      />
     </>
   );
 }

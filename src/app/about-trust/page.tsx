@@ -10,9 +10,16 @@ export default function AboutTrustPage() {
   return (
     <>
       <PageHero
-        variant="editorial"
-        title="About Trust"
-        subtitle={`Learn about the vision, mission, and legacy of ${siteConfig.trust}`}
+        variant="trust"
+        title={siteConfig.name}
+        subtitle={`A college of ${siteConfig.trust} — vision, mission, and a 25-year legacy of rural education.`}
+        image="/gallery/academic-block.png"
+        imageAlt="Main academic block and lawn at Gautam Buddha College of Education"
+        images={[
+          "/gallery/academic-block.png",
+          "/gallery/campus-entrance.png",
+          "/gallery/campus-lawn.png",
+        ]}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "About Trust" }]}
       />
       <AboutSections className="bg-white" />

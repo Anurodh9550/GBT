@@ -6,9 +6,12 @@ import { MotionDiv, MotionStagger } from "@/components/motion";
 import { defaultTransition } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 import RegisterButton from "@/components/RegisterButton";
+import PortalIcon from "@/components/PortalIcon";
 
 export type HeroVariant =
   | "editorial"
+  | "trust"
+  | "admission"
   | "photo"
   | "mosaic"
   | "maroon"
@@ -32,6 +35,7 @@ type PageHeroProps = {
   variant?: HeroVariant;
   image?: string;
   imageAlt?: string;
+  images?: string[];
   tone?: "orange" | "maroon" | "green" | "navy";
 };
 
@@ -44,6 +48,8 @@ const TONE = {
 
 export default function PageHero(props: PageHeroProps) {
   const variant = props.variant ?? "editorial";
+  if (variant === "trust") return <TrustHero {...props} />;
+  if (variant === "admission") return <AdmissionHero {...props} />;
   if (variant === "photo") return <PhotoHero {...props} />;
   if (variant === "mosaic") return <MosaicHero {...props} />;
   if (variant === "maroon") return <MaroonHero {...props} />;
@@ -124,6 +130,232 @@ function HeroCtas({ light = false }: { light?: boolean }) {
         {siteConfig.enquiryCtaLabel} →
       </Link>
     </div>
+  );
+}
+
+function TrustHero({ title, subtitle, breadcrumb, image, imageAlt, images }: PageHeroProps) {
+  const fallbackShots = [
+    "/gallery/academic-block.png",
+    "/gallery/campus-entrance.png",
+    "/gallery/campus-lawn.png",
+  ];
+  const shots = [
+    images?.[0] ?? image ?? fallbackShots[0],
+    images?.[1] ?? fallbackShots[1],
+    images?.[2] ?? fallbackShots[2],
+  ];
+  const alts = [
+    imageAlt ?? "Main academic block at Gautam Buddha College of Education",
+    "Campus entrance gate of Gautam Buddha College of Education",
+    "Campus lawn and teaching block at Gautam Buddha College of Education",
+  ];
+  const highlights = [
+    { value: siteConfig.established, label: "Established" },
+    { value: "25+", label: "Years of Service" },
+    { value: "NAAC", label: "Accredited" },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-[#f3eee6]">
+      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-maroon/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-brand-orange/15 blur-3xl" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 lg:py-16">
+        <MotionStagger animateOnMount className="relative z-10">
+          <Breadcrumbs items={breadcrumb} />
+          <MotionDiv variant="fadeUp">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-maroon/15 bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-maroon">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
+              Est. {siteConfig.established} · {siteConfig.shortName}
+            </span>
+          </MotionDiv>
+          <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
+            <p className="text-eyebrow mt-5 text-brand-orange">About Our College</p>
+            <h1 className="text-hero mt-3 max-w-xl text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
+            <div className="section-title-rule" aria-hidden />
+          </MotionDiv>
+          {subtitle && (
+            <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.14 }}>
+              <p className="text-body-lg mt-5 max-w-lg text-slate-600">{subtitle}</p>
+            </MotionDiv>
+          )}
+          <MotionDiv
+            variant="fadeUp"
+            transition={{ ...defaultTransition, delay: 0.2 }}
+            className="mt-8 grid max-w-md grid-cols-3 gap-3 border-t border-brand-maroon/10 pt-6"
+          >
+            {highlights.map((item) => (
+              <div key={item.label}>
+                <p className="font-serif text-2xl font-bold text-brand-maroon">{item.value}</p>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">{item.label}</p>
+              </div>
+            ))}
+          </MotionDiv>
+        </MotionStagger>
+
+        <MotionDiv variant="slideRight" animateOnMount className="relative mx-auto w-full max-w-xl lg:max-w-none">
+          <div className="absolute -right-2 -top-2 hidden h-[86%] w-[78%] rounded-[1.75rem] border-2 border-brand-orange/35 lg:block" aria-hidden />
+
+          <div className="grid grid-cols-2 gap-3 sm:hidden">
+            <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-2xl shadow-md">
+              <Image src={shots[0]} alt={alts[0]} fill priority sizes="100vw" className="object-cover object-center" />
+            </div>
+            {shots.slice(1).map((src, i) => (
+              <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm">
+                <Image src={src} alt={alts[i + 1]} fill sizes="50vw" className="object-cover object-center" />
+              </div>
+            ))}
+          </div>
+
+          <div className="relative hidden min-h-[420px] sm:block lg:min-h-[460px]">
+            <div className="absolute inset-y-0 right-0 w-[78%] overflow-hidden rounded-[1.75rem] shadow-[0_24px_50px_-24px_rgba(92,46,46,0.45)]">
+              <Image
+                src={shots[0]}
+                alt={alts[0]}
+                fill
+                priority
+                sizes="(max-width: 1024px) 70vw, 42vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/35 via-transparent to-transparent" />
+              <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-maroon">
+                Main Campus
+              </span>
+            </div>
+            <div className="absolute bottom-4 left-0 z-10 w-[44%] overflow-hidden rounded-2xl border-[6px] border-[#f3eee6] shadow-xl">
+              <div className="relative aspect-[5/4]">
+                <Image src={shots[1]} alt={alts[1]} fill sizes="28vw" className="object-cover object-[center_60%]" />
+              </div>
+            </div>
+            <div className="absolute right-6 top-6 z-10 w-[30%] overflow-hidden rounded-2xl border-[5px] border-white shadow-lg">
+              <div className="relative aspect-square">
+                <Image src={shots[2]} alt={alts[2]} fill sizes="22vw" className="object-cover object-center" />
+              </div>
+            </div>
+          </div>
+        </MotionDiv>
+      </div>
+      <div className="header-accent-line" />
+    </section>
+  );
+}
+
+function AdmissionHero({ title, subtitle, breadcrumb, image, imageAlt, images }: PageHeroProps) {
+  const facts = [
+    { value: "Started", label: "Counseling" },
+    { value: siteConfig.admissionBatch, label: "Session" },
+    { value: "31 July", label: "Last Date" },
+    { value: siteConfig.phone, label: "Help Desk", href: `tel:${siteConfig.phone.replace(/\s/g, "")}` },
+  ];
+  const shots = [
+    {
+      src: images?.[0] ?? image ?? "/courses/bds.jpg",
+      alt: imageAlt ?? "BDS dental simulation lab",
+      label: "BDS Clinic",
+    },
+    {
+      src: images?.[1] ?? "/courses/d-pharma.jpg",
+      alt: "Pharmacy practical laboratory",
+      label: "D-Pharma Lab",
+    },
+    {
+      src: images?.[2] ?? "/courses/bba.jpg",
+      alt: "Management classroom discussion",
+      label: "BBA / MBA",
+    },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-[#f7f2ea]">
+      <div className="relative mx-auto grid max-w-7xl lg:grid-cols-2">
+        <MotionStagger animateOnMount className="flex flex-col justify-center px-4 py-12 sm:py-14 lg:py-16 lg:pr-14">
+          <Breadcrumbs items={breadcrumb} />
+          <MotionDiv variant="fadeUp">
+            <CounselingChip />
+          </MotionDiv>
+          <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
+            <p className="text-eyebrow mt-5 text-brand-orange">Admissions Open</p>
+            <h1 className="text-hero mt-3 max-w-xl text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
+            <div className="section-title-rule" aria-hidden />
+          </MotionDiv>
+          {subtitle && (
+            <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.14 }}>
+              <p className="text-body-lg mt-5 max-w-lg text-slate-600">{subtitle}</p>
+            </MotionDiv>
+          )}
+          <MotionDiv
+            variant="fadeUp"
+            transition={{ ...defaultTransition, delay: 0.2 }}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <Link href={siteConfig.admissionRegisterUrl} className="btn-primary">
+              {siteConfig.ctaRegisterLabel} →
+            </Link>
+            <Link href={siteConfig.enquiryFormUrl} className="btn-outline-maroon">
+              {siteConfig.enquiryCtaLabel} →
+            </Link>
+          </MotionDiv>
+          <a
+            href={siteConfig.admissionFormPdf}
+            download="GBCE-Admission-Form.pdf"
+            className="mt-4 inline-flex w-fit text-sm font-semibold text-brand-maroon hover:text-brand-orange"
+          >
+            Download admission form (PDF) →
+          </a>
+        </MotionStagger>
+
+        <MotionDiv variant="slideRight" animateOnMount className="px-4 pb-10 lg:px-6 lg:py-12">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src={shots[0].src}
+                alt={shots[0].alt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-transparent" />
+              <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-maroon">
+                {shots[0].label}
+              </span>
+            </div>
+            {shots.slice(1).map((shot) => (
+              <div key={shot.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md">
+                <Image src={shot.src} alt={shot.alt} fill sizes="25vw" className="object-cover object-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/45 via-transparent to-transparent" />
+                <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-brand-maroon">
+                  {shot.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </MotionDiv>
+      </div>
+
+      <div className="border-t border-brand-maroon/10 bg-brand-maroon-dark text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px sm:grid-cols-4">
+          {facts.map((fact) => {
+            const inner = (
+              <>
+                <p className="font-serif text-lg font-bold sm:text-xl">{fact.value}</p>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-white/60">{fact.label}</p>
+              </>
+            );
+            return fact.href ? (
+              <a key={fact.label} href={fact.href} className="px-4 py-4 hover:bg-white/5 sm:px-6 sm:py-5">
+                {inner}
+              </a>
+            ) : (
+              <div key={fact.label} className="px-4 py-4 sm:px-6 sm:py-5">
+                {inner}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="header-accent-line" />
+    </section>
   );
 }
 
@@ -371,46 +603,108 @@ function JournalHero({ title, subtitle, breadcrumb }: PageHeroProps) {
   );
 }
 
-function ContactHero({ title, subtitle, breadcrumb }: PageHeroProps) {
+function ContactHero({ title, subtitle, breadcrumb, image, imageAlt }: PageHeroProps) {
   return (
-    <section className="border-b border-slate-200 bg-[#eef4ef]">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-2 lg:items-center lg:py-16">
-        <MotionStagger animateOnMount>
+    <section className="relative overflow-hidden bg-[#eef4ef]">
+      <div className="relative mx-auto grid max-w-7xl lg:grid-cols-2">
+        <MotionStagger animateOnMount className="flex flex-col justify-center px-4 py-12 sm:py-14 lg:py-16 lg:pr-12">
           <Breadcrumbs items={breadcrumb} />
-          <p className="text-eyebrow text-brand-green">Get in Touch</p>
-          <h1 className="text-hero mt-3 text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
-          {subtitle && <p className="mt-4 text-slate-600">{subtitle}</p>}
+          <MotionDiv variant="fadeUp">
+            <p className="text-eyebrow text-brand-green">Get in Touch</p>
+          </MotionDiv>
+          <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
+            <h1 className="text-hero mt-3 max-w-xl text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
+            <div className="section-title-rule" aria-hidden />
+          </MotionDiv>
+          {subtitle && (
+            <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.14 }}>
+              <p className="text-body-lg mt-5 max-w-lg text-slate-600">{subtitle}</p>
+            </MotionDiv>
+          )}
+          <MotionDiv
+            variant="fadeUp"
+            transition={{ ...defaultTransition, delay: 0.2 }}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="btn-primary">
+              Call {siteConfig.phone}
+            </a>
+            <Link href={siteConfig.enquiryFormUrl} className="btn-outline-maroon">
+              {siteConfig.enquiryCtaLabel} →
+            </Link>
+          </MotionDiv>
         </MotionStagger>
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-          <p className="text-sm leading-relaxed text-slate-600">{siteConfig.address}</p>
-          <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="mt-3 block font-semibold text-brand-maroon">
-            {siteConfig.phone}
-          </a>
-          <a href={`mailto:${siteConfig.email}`} className="mt-1 block text-sm text-brand-orange">
-            {siteConfig.email}
-          </a>
-        </div>
+        <MotionDiv variant="slideRight" animateOnMount className="relative min-h-[240px] sm:min-h-[320px] lg:min-h-[420px]">
+          <Image
+            src={image ?? "/gallery/campus-entrance.png"}
+            alt={imageAlt ?? `${siteConfig.name} campus entrance`}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/45 via-transparent to-transparent" />
+          <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/95 p-4 shadow-lg sm:inset-x-6 sm:bottom-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-green">Campus Office</p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">{siteConfig.address}</p>
+          </div>
+        </MotionDiv>
       </div>
+      <div className="header-accent-line" />
     </section>
   );
 }
 
 function PortalHero({ title, subtitle, breadcrumb }: PageHeroProps) {
   return (
-    <section className="bg-slate-900 text-white">
-      <MotionStagger animateOnMount className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
-        <Breadcrumbs items={breadcrumb} light />
-        <h1 className="text-hero mt-2 text-4xl sm:text-5xl">{title}</h1>
-        {subtitle && <p className="mt-4 max-w-2xl text-slate-300">{subtitle}</p>}
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/student-login" className="btn-primary">
-            Student Login →
+    <section className="relative overflow-hidden bg-[#f3efe8]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 lg:grid-cols-2 lg:py-16">
+        <MotionStagger animateOnMount>
+          <Breadcrumbs items={breadcrumb} />
+          <MotionDiv variant="fadeUp">
+            <p className="text-eyebrow text-brand-orange">Student & Faculty Access</p>
+          </MotionDiv>
+          <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
+            <h1 className="text-hero mt-3 text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
+            <div className="section-title-rule" aria-hidden />
+          </MotionDiv>
+          {subtitle && (
+            <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.14 }}>
+              <p className="text-body-lg mt-5 max-w-lg text-slate-600">{subtitle}</p>
+            </MotionDiv>
+          )}
+        </MotionStagger>
+
+        <MotionDiv variant="slideRight" animateOnMount className="grid gap-4">
+          <Link
+            href="/student-login"
+            className="group flex items-center gap-4 rounded-2xl border border-brand-orange/20 bg-white p-5 shadow-sm transition hover:border-brand-orange hover:shadow-md"
+          >
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-orange/10">
+              <PortalIcon id="student" className="h-7 w-7" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-serif text-lg font-bold text-brand-maroon">Student ERP</span>
+              <span className="mt-0.5 block text-sm text-slate-500">Classes, assignments, exams and results</span>
+            </span>
+            <span className="text-sm font-bold text-brand-orange group-hover:translate-x-0.5">Login →</span>
           </Link>
-          <Link href="/faculty-login" className="btn-outline-white">
-            Faculty Login →
+          <Link
+            href="/faculty-login"
+            className="group flex items-center gap-4 rounded-2xl border border-brand-green/20 bg-white p-5 shadow-sm transition hover:border-brand-green hover:shadow-md"
+          >
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-green/10">
+              <PortalIcon id="faculty" className="h-7 w-7 text-brand-green" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-serif text-lg font-bold text-brand-maroon">Faculty ERP</span>
+              <span className="mt-0.5 block text-sm text-slate-500">Attendance, classes and administration</span>
+            </span>
+            <span className="text-sm font-bold text-brand-green group-hover:translate-x-0.5">Login →</span>
           </Link>
-        </div>
-      </MotionStagger>
+        </MotionDiv>
+      </div>
+      <div className="header-accent-line" />
     </section>
   );
 }

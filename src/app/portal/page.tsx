@@ -2,86 +2,70 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import PortalIcon, { portalIconIdFromLabel } from "@/components/PortalIcon";
+import CTABanner from "@/components/CTABanner";
 import { MotionSection, MotionStagger, MotionCard } from "@/components/motion";
 import { portalNav, siteConfig } from "@/lib/site-config";
-import RegisterButton from "@/components/RegisterButton";
 
 export const metadata = { title: "Portal" };
+
+const services = portalNav.filter(
+  (item) => item.href !== "/student-login" && item.href !== "/faculty-login"
+);
 
 export default function PortalPage() {
   return (
     <>
       <PageHero
         variant="portal"
-        title="Student & Faculty Portal"
-        subtitle="Access online classes, study materials, assignments, exams, and results."
+        title="College Portal"
+        subtitle="Login to Student ERP or Faculty ERP, then open classes, study materials, assignments, exams and results."
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Portal" }]}
       />
+
       <MotionSection className="section-padding bg-white">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-14 grid gap-6 sm:grid-cols-2">
-            <MotionCard>
-              <Link
-                href="/student-login"
-                className="card-surface-interactive flex items-center gap-5 border-brand-orange/20 bg-brand-orange/5 p-8"
-              >
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-orange/15">
-                  <PortalIcon id="student" className="h-8 w-8" />
-                </span>
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-brand-maroon">Student ERP</h3>
-                  <p className="mt-1 text-sm text-slate-600">Login for classes, materials & results</p>
-                </div>
-              </Link>
-            </MotionCard>
-            <MotionCard>
-              <Link
-                href="/faculty-login"
-                className="card-surface-interactive flex items-center gap-5 border-brand-green/20 bg-brand-green/5 p-8"
-              >
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-green/15">
-                  <PortalIcon id="faculty" className="h-8 w-8 text-brand-green" />
-                </span>
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-brand-maroon">Faculty ERP</h3>
-                  <p className="mt-1 text-sm text-slate-600">Login for faculty & staff portal</p>
-                </div>
-              </Link>
-            </MotionCard>
-          </div>
           <SectionHeading
             eyebrow="Quick Access"
-            title="Portal Services"
-            subtitle="Select a service below to login or access your academic resources."
-            align="center"
+            title="Academic Services"
+            subtitle="These tools open after you sign in. Choose a service to continue."
           />
-          <MotionStagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {portalNav.map((item) => (
+          <MotionStagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((item) => (
               <MotionCard key={item.href}>
-                <Link
-                  href={item.href}
-                  className="card-surface-interactive flex flex-col items-center p-8 text-center"
-                >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/10">
-                    <PortalIcon id={portalIconIdFromLabel(item.label)} className="h-7 w-7" />
+                <Link href={item.href} className="card-surface-interactive flex items-center gap-4 p-6">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-orange/10">
+                    <PortalIcon id={portalIconIdFromLabel(item.label)} className="h-6 w-6" />
                   </span>
-                  <span className="mt-4 font-sans text-sm font-bold text-brand-maroon">{item.label}</span>
+                  <span>
+                    <span className="block font-serif text-base font-bold text-brand-maroon">{item.label}</span>
+                    <span className="mt-0.5 block text-sm text-slate-500">Open {item.label.toLowerCase()}</span>
+                  </span>
                 </Link>
               </MotionCard>
             ))}
+            <MotionCard>
+              <Link href="/contact" className="card-surface-interactive flex items-center gap-4 p-6">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-orange/10">
+                  <PortalIcon id="contact" className="h-6 w-6" />
+                </span>
+                <span>
+                  <span className="block font-serif text-base font-bold text-brand-maroon">Need help?</span>
+                  <span className="mt-0.5 block text-sm text-slate-500">Contact the college office</span>
+                </span>
+              </Link>
+            </MotionCard>
           </MotionStagger>
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm text-slate-600">Not enrolled yet?</p>
-            <RegisterButton variant="outline" />
-            <Link
-              href={siteConfig.enquiryFormUrl}
-              className="text-sm font-bold text-brand-orange hover:underline"
-            >
-              {siteConfig.enquiryCtaLabel} →
-            </Link>
-          </div>
         </div>
       </MotionSection>
+
+      <CTABanner
+        title="New student? Register first"
+        subtitle={`Admissions for session ${siteConfig.admissionBatch} are open. Enquiry or register, then use the portal after enrolment.`}
+        primaryLabel="Register Now for Admission →"
+        primaryHref={siteConfig.admissionRegisterUrl}
+        secondaryLabel={siteConfig.enquiryCtaLabel}
+        secondaryHref={siteConfig.enquiryFormUrl}
+      />
     </>
   );
 }

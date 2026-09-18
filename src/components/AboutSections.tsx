@@ -49,7 +49,7 @@ function AboutBlock({
               alt={title}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
             <div className="absolute bottom-4 right-4 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-brand-maroon shadow-md">
               {badge}
@@ -113,7 +113,7 @@ function AboutBlock({
                 alt={title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition duration-700 hover:scale-105"
+                className="object-cover object-[center_30%] transition duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/55 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
@@ -224,7 +224,7 @@ export default function AboutSections({
       <div className="mx-auto max-w-7xl px-4">
         {isOfficial && (
           <MotionDiv shadow variant="fadeUp" className="mx-auto mb-8 max-w-3xl text-center lg:mb-10">
-            <p className="text-eyebrow text-brand-orange">About Our Institution</p>
+            <p className="text-eyebrow text-brand-orange">About Our College</p>
             <h2 className="mt-4 font-serif text-3xl font-bold text-brand-maroon sm:text-4xl lg:text-[2.75rem]">
               Discover <span className="text-brand-green">{siteConfig.name}</span>
             </h2>

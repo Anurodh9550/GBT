@@ -13,7 +13,7 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-auto bg-brand-black font-sans text-slate-400"
+      className="mt-auto bg-brand-maroon-dark font-sans text-white/70"
     >
       <div className="footer-accent-line" />
       <div className="border-b border-white/10">
@@ -29,7 +29,7 @@ export default function Footer() {
               />
               <div>
                 <p className="font-serif text-base font-bold text-white">{siteConfig.name}</p>
-                <p className="text-xs font-normal text-neutral-500">{siteConfig.trust}</p>
+                <p className="text-xs font-normal text-white/50">{siteConfig.trust}</p>
               </div>
             </div>
             <p className="mt-4 text-sm font-normal leading-relaxed">
@@ -123,9 +123,11 @@ export default function Footer() {
         </MotionStagger>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs font-normal">
-        <p>&copy; {new Date().getFullYear()} {siteConfig.trust}. All rights reserved.</p>
-        <p>Managed by {siteConfig.trust}</p>
+      <div className="border-t border-white/10 bg-[#2a1515]">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs font-normal text-white/50">
+          <p>&copy; {new Date().getFullYear()} {siteConfig.trust}. All rights reserved.</p>
+          <p>Managed by {siteConfig.trust}</p>
+        </div>
       </div>
     </motion.footer>
   );

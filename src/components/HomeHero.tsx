@@ -1,174 +1,207 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
 import { MotionDiv, MotionStagger } from "@/components/motion";
 import { defaultTransition } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
-import RegisterButton from "@/components/RegisterButton";
 
-const heroSlides = [
-  { src: "/hero-campus.png", alt: "Gautam Buddha College of Education main campus building" },
-  { src: "/gallery/campus-entrance.png", alt: "Gautam Buddha College of Education campus entrance" },
-  { src: "/gallery/campus-building.png", alt: "Gautam Buddha College of Education campus lawn and building" },
-  { src: "/gallery/campus-view.png", alt: "Gautam Buddha College of Education campus grounds" },
+const campusSlides = [
+  {
+    src: "/hero/campus-block.png",
+    alt: "Main academic block at Gautam Buddha College of Education",
+    label: "Academic Block",
+  },
+  {
+    src: "/hero/campus-lawn.png",
+    alt: "Campus lawn and walkway at GBCE",
+    label: "Campus Lawn",
+  },
+  {
+    src: "/hero/campus-gate.png",
+    alt: "Campus entrance gate at Village Nagara, Jalaun",
+    label: "Campus Gate",
+  },
+  {
+    src: "/hero/classroom.png",
+    alt: "Students in a classroom discussion",
+    label: "Classroom",
+  },
 ];
 
-const SLIDE_MS = 5500;
+const sideShots = [
+  {
+    src: "/hero/dental-clinic.png",
+    alt: "Dental clinic training at the college",
+    label: "Dental Clinic",
+  },
+  {
+    src: "/hero/pharmacy-lab.png",
+    alt: "Pharmacy practical laboratory",
+    label: "Pharmacy Lab",
+  },
+];
+
+const facts = [
+  { value: siteConfig.established, label: "Established" },
+  { value: "25+", label: "Years" },
+  { value: "8+", label: "Programmes" },
+];
 
 export default function HomeHero() {
-  const [active, setActive] = useState(0);
-
-  const next = useCallback(() => {
-    setActive((i) => (i + 1) % heroSlides.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setActive((i) => (i - 1 + heroSlides.length) % heroSlides.length);
-  }, []);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = campusSlides.length;
 
   useEffect(() => {
-    const id = setInterval(next, SLIDE_MS);
-    return () => clearInterval(id);
-  }, [next]);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduce.matches || paused) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % total);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [paused, index, total]);
+
+  const goTo = (next: number) => setIndex((next + total) % total);
 
   return (
-    <section className="relative flex min-h-[90vh] items-center overflow-hidden bg-brand-black text-white">
-      {/* Sliding background images */}
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={heroSlides[active].src}
-          initial={{ opacity: 0, scale: 1.06 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={heroSlides[active].src}
-            alt={heroSlides[active].alt}
-            fill
-            priority={active === 0}
-            className="object-cover object-center brightness-110"
-            sizes="100vw"
-          />
-        </motion.div>
-      </AnimatePresence>
+    <section className="bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:py-14 lg:py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-14">
+          <MotionStagger animateOnMount>
+            <MotionDiv variant="fadeUp">
+              <p className="text-eyebrow text-brand-orange">
+                Counseling started · {siteConfig.admissionBatch}
+              </p>
+            </MotionDiv>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-black/75 via-brand-black/45 to-brand-black/15" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-brand-black/20" />
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(ellipse_at_80%_50%,#e8751a_0%,transparent_55%)]" />
-      </div>
+            <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
+              <h1 className="text-hero mt-4 text-4xl text-brand-maroon sm:text-5xl lg:text-[3.35rem] lg:leading-[1.08]">
+                Admissions Open
+                <span className="mt-1 block text-brand-orange">{siteConfig.admissionBatch}</span>
+              </h1>
+              <p className="mt-4 text-base text-slate-500">{siteConfig.name}</p>
+              <p className="mt-1 text-sm text-slate-400">Village Nagara, Jalaun</p>
+            </MotionDiv>
 
-      {/* Slide controls */}
-      <button
-        type="button"
-        onClick={prev}
-        aria-label="Previous slide"
-        className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50 sm:left-6"
-      >
-        ‹
-      </button>
-      <button
-        type="button"
-        onClick={next}
-        aria-label="Next slide"
-        className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur-sm transition hover:bg-black/50 sm:right-6"
-      >
-        ›
-      </button>
-
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-24 lg:py-32">
-        <MotionStagger animateOnMount className="max-w-2xl">
-          <MotionDiv
-            variant="fadeUp"
-            transition={defaultTransition}
-            className="text-eyebrow inline-block rounded-full border border-brand-orange/40 bg-brand-orange/10 px-4 py-1.5 text-brand-orange"
-          >
-            Admissions Open — Batch {siteConfig.admissionBatch}
-          </MotionDiv>
-          <MotionDiv
-            variant="slideLeft"
-            transition={{ ...defaultTransition, delay: 0.1 }}
-            className="text-hero mt-8 text-5xl text-white sm:text-6xl lg:text-[4.25rem] lg:leading-[1.05]"
-          >
-            <h1>
-              Empowering
-              <br />
-              <span className="text-brand-orange">Minds</span>
-              <br />
-              Shaping the
-              <br />
-              Future
-            </h1>
-          </MotionDiv>
-          <MotionDiv
-            variant="fadeUp"
-            transition={{ ...defaultTransition, delay: 0.2 }}
-            className="text-body-lg mt-8 max-w-lg text-neutral-300"
-          >
-            <p>
-              {siteConfig.name} — where world-class academics meet real-world
-              opportunities. Build your career with industry partners and a legacy
-              of excellence under {siteConfig.trust}.
-            </p>
-          </MotionDiv>
-          <MotionDiv
-            variant="fadeUp"
-            transition={{ ...defaultTransition, delay: 0.28 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <MotionDiv hover className="rounded-full">
+            <MotionDiv
+              variant="fadeUp"
+              transition={{ ...defaultTransition, delay: 0.16 }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
               <Link href={siteConfig.enquiryFormUrl} className="btn-primary">
-                {siteConfig.enquiryCtaLabel}
-                <span aria-hidden="true">→</span>
+                {siteConfig.enquiryCtaLabel} →
+              </Link>
+              <Link href={siteConfig.admissionRegisterUrl} className="btn-outline-maroon">
+                Register →
               </Link>
             </MotionDiv>
-            <MotionDiv hover className="rounded-full">
-              <RegisterButton variant="outline-white" />
+
+            <MotionDiv
+              variant="fadeUp"
+              transition={{ ...defaultTransition, delay: 0.22 }}
+              className="mt-10 flex gap-10"
+            >
+              {facts.map((fact) => (
+                <div key={fact.label}>
+                  <p className="font-serif text-2xl font-bold text-brand-maroon sm:text-3xl">{fact.value}</p>
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+                    {fact.label}
+                  </p>
+                </div>
+              ))}
             </MotionDiv>
-            <MotionDiv hover className="rounded-full">
-              <Link href="/about-trust" className="btn-outline-white !border-white/30 !text-white/90 hover:!bg-white/10">
-                Discover More
-              </Link>
-            </MotionDiv>
+          </MotionStagger>
+
+          <MotionDiv variant="slideRight" animateOnMount>
+            <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_12rem] lg:items-stretch">
+              <div
+                className="relative"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-slate-100 shadow-[0_28px_60px_-32px_rgba(15,23,42,0.42)]">
+                  {campusSlides.map((item, i) => (
+                    <div
+                      key={item.src}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+                        i === index ? "opacity-100" : "opacity-0"
+                      }`}
+                      aria-hidden={i !== index}
+                    >
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        fill
+                        priority={i === 0}
+                        sizes="(max-width: 1024px) 100vw, 46vw"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    aria-label="Previous photo"
+                    onClick={() => goTo(index - 1)}
+                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl text-brand-maroon shadow-md hover:bg-white"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next photo"
+                    onClick={() => goTo(index + 1)}
+                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl text-brand-maroon shadow-md hover:bg-white"
+                  >
+                    ›
+                  </button>
+
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between px-4 py-3">
+                    <p className="text-sm font-medium text-white drop-shadow">{campusSlides[index].label}</p>
+                    <div className="flex items-center gap-1.5">
+                      {campusSlides.map((item, i) => (
+                        <button
+                          key={item.src}
+                          type="button"
+                          aria-label={`Show ${item.label}`}
+                          aria-current={i === index}
+                          onClick={() => goTo(i)}
+                          className={`h-1.5 rounded-full transition-all ${
+                            i === index ? "w-6 bg-white" : "w-1.5 bg-white/50 hover:bg-white/80"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:grid-rows-2">
+                {sideShots.map((shot) => (
+                  <div
+                    key={shot.src}
+                    className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.4)] lg:aspect-auto lg:h-full lg:min-h-0"
+                  >
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      fill
+                      sizes="(max-width: 640px) 50vw, 12rem"
+                      className="object-cover object-center"
+                    />
+                    <span className="absolute bottom-2 left-2 text-[11px] font-medium text-white drop-shadow">
+                      {shot.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </MotionDiv>
-        </MotionStagger>
+        </div>
       </div>
-
-      {/* Slide dots */}
-      <div className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {heroSlides.map((slide, i) => (
-          <button
-            key={slide.src}
-            type="button"
-            aria-label={`Go to slide ${i + 1}`}
-            onClick={() => setActive(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === active ? "w-8 bg-brand-orange" : "w-2 bg-white/40 hover:bg-white/70"
-            }`}
-          />
-        ))}
-      </div>
-
-      <MotionDiv
-        animateOnMount
-        variant="fadeUp"
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-neutral-500"
-      >
-        <span className="text-eyebrow text-neutral-500">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="h-8 w-5 rounded-full border border-white/20 p-1"
-        >
-          <div className="mx-auto h-2 w-1 rounded-full bg-brand-orange" />
-        </motion.div>
-      </MotionDiv>
+      <div className="header-accent-line" />
     </section>
   );
 }
