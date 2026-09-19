@@ -491,7 +491,6 @@ function StripeHero({ title, subtitle, breadcrumb }: PageHeroProps) {
           <CounselingChip />
           <h1 className="text-hero mt-5 text-4xl text-slate-900 sm:text-5xl">{title}</h1>
           {subtitle && <p className="mt-4 max-w-2xl text-slate-600">{subtitle}</p>}
-          <HeroCtas />
         </MotionStagger>
       </div>
     </section>

@@ -365,6 +365,14 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
           })}
           <div className="mt-5 flex flex-col gap-3">
             <Link
+              href={siteConfig.admissionRegisterUrl}
+              onClick={onClose}
+              className="btn-outline-maroon flex w-full items-center justify-center py-3"
+            >
+              {siteConfig.registerCtaLabel}
+              <span aria-hidden="true">→</span>
+            </Link>
+            <Link
               href={siteConfig.enquiryFormUrl}
               onClick={onClose}
               className="btn-apply text-btn flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-white"
@@ -430,6 +438,13 @@ export function HeaderMain() {
           <NavLinks onNavigate={() => setMobileOpen(false)} />
 
           <div className="flex shrink-0 items-center gap-2">
+            <Link
+              href={siteConfig.admissionRegisterUrl}
+              className="text-btn hidden items-center gap-2 rounded-full border border-brand-maroon px-4 py-2.5 text-brand-maroon transition hover:bg-brand-maroon hover:text-white sm:inline-flex lg:px-5"
+            >
+              {siteConfig.registerCtaLabel}
+              <span className="text-base leading-none" aria-hidden="true">→</span>
+            </Link>
             <Link
               href={siteConfig.enquiryFormUrl}
               className="btn-apply text-btn hidden items-center gap-2 rounded-full px-4 py-2.5 text-white sm:inline-flex lg:px-5"
