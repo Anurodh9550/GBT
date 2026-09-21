@@ -594,8 +594,25 @@ function JournalHero({ title, subtitle, breadcrumb }: PageHeroProps) {
 }
 
 function ContactHero({ title, subtitle, breadcrumb, image, imageAlt }: PageHeroProps) {
+  const highlights = [
+    {
+      label: "Office hours",
+      value: "Mon–Sat · 9:00 AM onwards",
+    },
+    {
+      label: "Email",
+      value: siteConfig.email,
+      href: `mailto:${siteConfig.email}`,
+    },
+    {
+      label: "Counseling",
+      value: `Session ${siteConfig.admissionBatch}`,
+    },
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-[#eef4ef]">
+    <section className="relative overflow-hidden bg-[#f4f7f2]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(ellipse_at_left,rgba(45,106,46,0.08),transparent_62%)]" />
       <div className="relative mx-auto grid max-w-7xl lg:grid-cols-2">
         <MotionStagger animateOnMount className="flex flex-col justify-center px-4 py-12 sm:py-14 lg:py-16 lg:pr-12">
           <Breadcrumbs items={breadcrumb} />
@@ -614,14 +631,42 @@ function ContactHero({ title, subtitle, breadcrumb, image, imageAlt }: PageHeroP
           <MotionDiv
             variant="fadeUp"
             transition={{ ...defaultTransition, delay: 0.2 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-8 max-w-lg overflow-hidden rounded-2xl border border-brand-green/15 bg-white shadow-[0_10px_30px_rgba(45,106,46,0.06)]"
           >
-            <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="btn-primary">
-              Call {siteConfig.phone}
+            {highlights.map((item, i) => (
+              <div
+                key={item.label}
+                className={`flex items-start gap-4 px-5 py-3.5 ${i < highlights.length - 1 ? "border-b border-slate-100" : ""}`}
+              >
+                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#eef4ef] text-brand-green">
+                  {i === 0 ? <ClockIcon /> : i === 1 ? <MailIcon /> : <CalendarIcon />}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-brand-green">
+                    {item.label}
+                  </span>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="mt-0.5 block truncate text-sm font-semibold text-brand-maroon hover:text-brand-orange"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <span className="mt-0.5 block text-sm font-semibold text-slate-800">{item.value}</span>
+                  )}
+                </span>
+              </div>
+            ))}
+          </MotionDiv>
+          <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.26 }} className="mt-5">
+            <a
+              href="#campus-map"
+              className="inline-flex items-center gap-2 text-sm font-bold text-brand-maroon transition hover:text-brand-orange"
+            >
+              View campus on map
+              <span aria-hidden>→</span>
             </a>
-            <Link href={siteConfig.enquiryFormUrl} className="btn-outline-maroon">
-              {siteConfig.enquiryCtaLabel} →
-            </Link>
           </MotionDiv>
         </MotionStagger>
         <MotionDiv variant="slideRight" animateOnMount className="relative min-h-[240px] sm:min-h-[320px] lg:min-h-[420px]">
@@ -633,8 +678,8 @@ function ContactHero({ title, subtitle, breadcrumb, image, imageAlt }: PageHeroP
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/45 via-transparent to-transparent" />
-          <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/95 p-4 shadow-lg sm:inset-x-6 sm:bottom-6">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-transparent" />
+          <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/70 bg-white/95 p-4 shadow-lg backdrop-blur-sm sm:inset-x-6 sm:bottom-6">
             <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-green">Campus Office</p>
             <p className="mt-1 text-sm leading-relaxed text-slate-700">{siteConfig.address}</p>
           </div>
@@ -642,6 +687,38 @@ function ContactHero({ title, subtitle, breadcrumb, image, imageAlt }: PageHeroP
       </div>
       <div className="header-accent-line" />
     </section>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+      />
+    </svg>
   );
 }
 
