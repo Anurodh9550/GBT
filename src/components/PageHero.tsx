@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MotionDiv, MotionStagger } from "@/components/motion";
@@ -134,108 +135,102 @@ function HeroCtas({ light = false }: { light?: boolean }) {
 }
 
 function TrustHero({ title, subtitle, breadcrumb, image, imageAlt, images }: PageHeroProps) {
-  const fallbackShots = [
-    "/gallery/academic-block.png",
-    "/gallery/campus-entrance.png",
-    "/gallery/campus-lawn.png",
-  ];
-  const shots = [
-    images?.[0] ?? image ?? fallbackShots[0],
-    images?.[1] ?? fallbackShots[1],
-    images?.[2] ?? fallbackShots[2],
-  ];
-  const alts = [
-    imageAlt ?? "Main academic block at Gautam Buddha College of Education",
-    "Campus entrance gate of Gautam Buddha College of Education",
-    "Campus lawn and teaching block at Gautam Buddha College of Education",
+  const campusSlides = [
+    {
+      src: images?.[0] ?? image ?? "/gallery/academic-block.png",
+      alt: imageAlt ?? "Main academic block at Gautam Buddha College of Education",
+    },
+    {
+      src: images?.[1] ?? "/gallery/campus-entrance.png",
+      alt: "Campus entrance gate of Gautam Buddha College of Education",
+    },
+    {
+      src: images?.[2] ?? "/gallery/campus-lawn.png",
+      alt: "Campus lawn and teaching block at Gautam Buddha College of Education",
+    },
+    {
+      src: "/gallery/campus-approach.png",
+      alt: "Approach road to Gautam Buddha College of Education",
+    },
+    {
+      src: "/gallery/campus-gate-wide.png",
+      alt: "Campus gate at Village Nagara, Jalaun",
+    },
   ];
   const highlights = [
     { value: siteConfig.established, label: "Established" },
     { value: "25+", label: "Years of Service" },
     { value: "NAAC", label: "Accredited" },
   ];
+  const [index, setIndex] = useState(0);
+  const total = campusSlides.length;
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduce.matches) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % total);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [total]);
 
   return (
-    <section className="relative overflow-hidden bg-[#f3eee6]">
-      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-maroon/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-brand-orange/15 blur-3xl" />
+    <section className="relative isolate overflow-hidden bg-brand-maroon-dark">
+      <div className="absolute inset-0">
+        {campusSlides.map((item, i) => (
+          <div
+            key={item.src}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              i === index ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden={i !== index}
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover object-[center_42%]"
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-brand-maroon-dark/70 to-black/35" />
+      </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 lg:py-16">
-        <MotionStagger animateOnMount className="relative z-10">
-          <Breadcrumbs items={breadcrumb} />
+      <div className="relative z-10 mx-auto flex min-h-[22rem] max-w-7xl flex-col justify-end px-4 py-12 sm:min-h-[26rem] lg:min-h-[30rem] lg:py-16">
+        <MotionStagger animateOnMount>
+          <Breadcrumbs items={breadcrumb} light />
           <MotionDiv variant="fadeUp">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-maroon/15 bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-maroon">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-orange backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
               Est. {siteConfig.established} · {siteConfig.shortName}
             </span>
           </MotionDiv>
           <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.08 }}>
             <p className="text-eyebrow mt-5 text-brand-orange">About Our College</p>
-            <h1 className="text-hero mt-3 max-w-xl text-4xl text-brand-maroon sm:text-5xl">{title}</h1>
-            <div className="section-title-rule" aria-hidden />
+            <h1 className="text-hero mt-3 max-w-3xl text-4xl text-white sm:text-5xl">{title}</h1>
           </MotionDiv>
           {subtitle && (
             <MotionDiv variant="fadeUp" transition={{ ...defaultTransition, delay: 0.14 }}>
-              <p className="text-body-lg mt-5 max-w-lg text-slate-600">{subtitle}</p>
+              <p className="text-body-lg mt-5 max-w-2xl text-white/80">{subtitle}</p>
             </MotionDiv>
           )}
           <MotionDiv
             variant="fadeUp"
             transition={{ ...defaultTransition, delay: 0.2 }}
-            className="mt-8 grid max-w-md grid-cols-3 gap-3 border-t border-brand-maroon/10 pt-6"
+            className="mt-8 grid max-w-lg grid-cols-3 gap-6 border-t border-white/15 pt-6"
           >
             {highlights.map((item) => (
               <div key={item.label}>
-                <p className="font-serif text-2xl font-bold text-brand-maroon">{item.value}</p>
-                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">{item.label}</p>
+                <p className="font-serif text-2xl font-bold text-white sm:text-3xl">{item.value}</p>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-white/60">{item.label}</p>
               </div>
             ))}
           </MotionDiv>
         </MotionStagger>
-
-        <MotionDiv variant="slideRight" animateOnMount className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="absolute -right-2 -top-2 hidden h-[86%] w-[78%] rounded-[1.75rem] border-2 border-brand-orange/35 lg:block" aria-hidden />
-
-          <div className="grid grid-cols-2 gap-3 sm:hidden">
-            <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-2xl shadow-md">
-              <Image src={shots[0]} alt={alts[0]} fill priority sizes="100vw" className="object-cover object-center" />
-            </div>
-            {shots.slice(1).map((src, i) => (
-              <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm">
-                <Image src={src} alt={alts[i + 1]} fill sizes="50vw" className="object-cover object-center" />
-              </div>
-            ))}
-          </div>
-
-          <div className="relative hidden min-h-[420px] sm:block lg:min-h-[460px]">
-            <div className="absolute inset-y-0 right-0 w-[78%] overflow-hidden rounded-[1.75rem] shadow-[0_24px_50px_-24px_rgba(92,46,46,0.45)]">
-              <Image
-                src={shots[0]}
-                alt={alts[0]}
-                fill
-                priority
-                sizes="(max-width: 1024px) 70vw, 42vw"
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/35 via-transparent to-transparent" />
-              <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-maroon">
-                Main Campus
-              </span>
-            </div>
-            <div className="absolute bottom-4 left-0 z-10 w-[44%] overflow-hidden rounded-2xl border-[6px] border-[#f3eee6] shadow-xl">
-              <div className="relative aspect-[5/4]">
-                <Image src={shots[1]} alt={alts[1]} fill sizes="28vw" className="object-cover object-[center_60%]" />
-              </div>
-            </div>
-            <div className="absolute right-6 top-6 z-10 w-[30%] overflow-hidden rounded-2xl border-[5px] border-white shadow-lg">
-              <div className="relative aspect-square">
-                <Image src={shots[2]} alt={alts[2]} fill sizes="22vw" className="object-cover object-center" />
-              </div>
-            </div>
-          </div>
-        </MotionDiv>
       </div>
-      <div className="header-accent-line" />
+      <div className="relative z-10 header-accent-line" />
     </section>
   );
 }
@@ -485,12 +480,11 @@ function StripeHero({ title, subtitle, breadcrumb }: PageHeroProps) {
   return (
     <section className="border-b border-slate-200 bg-white">
       <div className="mx-auto flex max-w-7xl">
-        <div className="hidden w-2 bg-gradient-to-b from-brand-orange via-brand-maroon to-brand-green sm:block" />
-        <MotionStagger animateOnMount className="flex-1 px-4 py-12 sm:px-8 lg:py-16">
+        <div className="hidden w-1.5 bg-gradient-to-b from-brand-orange via-brand-maroon to-brand-green sm:block" />
+        <MotionStagger animateOnMount className="flex-1 px-4 py-6 sm:px-8 sm:py-7">
           <Breadcrumbs items={breadcrumb} />
-          <CounselingChip />
-          <h1 className="text-hero mt-5 text-4xl text-slate-900 sm:text-5xl">{title}</h1>
-          {subtitle && <p className="mt-4 max-w-2xl text-slate-600">{subtitle}</p>}
+          <h1 className="text-hero mt-2 text-2xl text-slate-900 sm:text-3xl">{title}</h1>
+          {subtitle && <p className="mt-1.5 text-sm text-slate-600">{subtitle}</p>}
         </MotionStagger>
       </div>
     </section>

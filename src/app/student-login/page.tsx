@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import PageHero from "@/components/PageHero";
 import { MotionSection, MotionDiv } from "@/components/motion";
 import { setStudentSession } from "@/components/student-erp/StudentErpShell";
 import PortalIcon from "@/components/PortalIcon";
@@ -59,15 +58,7 @@ export default function StudentLoginPage() {
   };
 
   return (
-    <>
-      <PageHero
-        variant="login"
-        tone="orange"
-        title="Student Login"
-        subtitle="Access your dashboard, classes, assignments, and results"
-        breadcrumb={[{ label: "Home", href: "/" }, { label: "Student Login" }]}
-      />
-      <MotionSection className="section-padding bg-slate-50">
+    <MotionSection className="bg-slate-50 py-12 lg:py-16">
         <div className="mx-auto max-w-md px-4">
           <MotionDiv shadow className="card-surface p-8">
             <div className="mb-8 text-center">
@@ -125,6 +116,5 @@ export default function StudentLoginPage() {
           </MotionDiv>
         </div>
       </MotionSection>
-    </>
   );
 }

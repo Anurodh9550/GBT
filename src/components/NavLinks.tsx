@@ -4,8 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { mainNav, portalDropdown, academicsDropdown, campusDropdown, siteConfig } from "@/lib/site-config";
-import { featuredCourses } from "@/lib/site-data";
+import { mainNav, portalDropdown, admissionsDropdown, campusDropdown, siteConfig } from "@/lib/site-config";
 
 function isActive(pathname: string, href: string, matchPaths?: string[]) {
   if (matchPaths) {
@@ -151,7 +150,7 @@ function NavItem({
 
 export default function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState<"academics" | "campus" | "portal" | null>(null);
+  const [openMenu, setOpenMenu] = useState<"admissions" | "campus" | "portal" | null>(null);
   const close = () => {
     setOpenMenu(null);
     onNavigate?.();
@@ -160,7 +159,7 @@ export default function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="hidden items-center justify-center lg:flex" aria-label="Main navigation">
       {mainNav.map((item) => {
-        if (item.label === "Academics") {
+        if (item.label === "Admissions") {
           const active = isActive(pathname, item.href, item.matchPaths);
 
           return (
@@ -169,39 +168,15 @@ export default function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
               label={item.label}
               href={item.href}
               active={active}
-              open={openMenu === "academics"}
-              onOpen={() => setOpenMenu("academics")}
+              open={openMenu === "admissions"}
+              onOpen={() => setOpenMenu("admissions")}
               onClose={() => setOpenMenu(null)}
-              wide
             >
-              {academicsDropdown.slice(0, 2).map((entry) => (
+              {admissionsDropdown.map((entry) => (
                 <DropdownItem key={entry.href} href={entry.href} onClick={close}>
-                  <span className="font-medium">{entry.label}</span>
+                  <span>{entry.label}</span>
                 </DropdownItem>
               ))}
-              <div className="mx-1 mt-1 border-t border-neutral-100 pt-1">
-                <p className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
-                  Our Courses
-                </p>
-                {featuredCourses.map((course) => (
-                  <DropdownItem
-                    key={course.slug}
-                    href={course.href ?? `/courses#${course.slug}`}
-                    onClick={close}
-                  >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10 text-lg">
-                      {course.icon}
-                    </span>
-                    <span className="leading-snug">
-                      <span className="font-semibold text-brand-maroon">{course.code}</span>
-                      <span className="block text-xs text-neutral-500">{course.title}</span>
-                    </span>
-                  </DropdownItem>
-                ))}
-                <DropdownItem href="/courses" onClick={close}>
-                  <span className="text-xs font-bold text-brand-orange">View All Courses →</span>
-                </DropdownItem>
-              </div>
             </DropdownNav>
           );
         }
@@ -291,25 +266,18 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         <nav className="mx-auto max-w-[1400px] px-4 py-4" aria-label="Mobile navigation">
           {mainNav.map((item) => {
             const active = isActive(pathname, item.href, item.matchPaths);
-            const isAcademics = item.label === "Academics";
+            const isAdmissions = item.label === "Admissions";
             const isCampus = item.label === "Campus";
             const isPortal = item.label === "Portal";
 
-            if (isAcademics || isCampus || isPortal) {
+            if (isAdmissions || isCampus || isPortal) {
               const key = item.label;
               const isOpen = expanded === key;
-              const subItems = isAcademics
-                ? [
-                    ...academicsDropdown.slice(0, 2).map((entry) => ({
-                      label: entry.label,
-                      href: entry.href,
-                    })),
-                    ...featuredCourses.map((course) => ({
-                      label: `${course.code} — ${course.title}`,
-                      href: course.href ?? `/courses#${course.slug}`,
-                    })),
-                    { label: "View All Courses", href: "/courses" },
-                  ]
+              const subItems = isAdmissions
+                ? admissionsDropdown.map((entry) => ({
+                    label: entry.label,
+                    href: entry.href,
+                  }))
                 : isCampus
                   ? campusDropdown.map((entry) => ({
                       label: entry.label,
@@ -364,14 +332,6 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
             );
           })}
           <div className="mt-5 flex flex-col gap-3">
-            <Link
-              href={siteConfig.admissionRegisterUrl}
-              onClick={onClose}
-              className="btn-outline-maroon flex w-full items-center justify-center py-3"
-            >
-              {siteConfig.registerCtaLabel}
-              <span aria-hidden="true">→</span>
-            </Link>
             <Link
               href={siteConfig.enquiryFormUrl}
               onClick={onClose}
@@ -438,13 +398,6 @@ export function HeaderMain() {
           <NavLinks onNavigate={() => setMobileOpen(false)} />
 
           <div className="flex shrink-0 items-center gap-2">
-            <Link
-              href={siteConfig.admissionRegisterUrl}
-              className="text-btn hidden items-center gap-2 rounded-full border border-brand-maroon px-4 py-2.5 text-brand-maroon transition hover:bg-brand-maroon hover:text-white sm:inline-flex lg:px-5"
-            >
-              {siteConfig.registerCtaLabel}
-              <span className="text-base leading-none" aria-hidden="true">→</span>
-            </Link>
             <Link
               href={siteConfig.enquiryFormUrl}
               className="btn-apply text-btn hidden items-center gap-2 rounded-full px-4 py-2.5 text-white sm:inline-flex lg:px-5"

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import PageHero from "@/components/PageHero";
 import { MotionSection, MotionDiv } from "@/components/motion";
 import { setFacultySession } from "@/components/faculty-erp/FacultyErpShell";
 import PortalIcon from "@/components/PortalIcon";
@@ -60,15 +59,7 @@ export default function FacultyLoginPage() {
   };
 
   return (
-    <>
-      <PageHero
-        variant="login"
-        tone="green"
-        title="Faculty Login"
-        subtitle="Faculty & staff portal for classes, attendance, and administration"
-        breadcrumb={[{ label: "Home", href: "/" }, { label: "Faculty Login" }]}
-      />
-      <MotionSection className="section-padding bg-slate-50">
+    <MotionSection className="bg-slate-50 py-12 lg:py-16">
         <div className="mx-auto max-w-md px-4">
           <MotionDiv shadow className="card-surface p-8">
             <div className="mb-8 text-center">
@@ -131,6 +122,5 @@ export default function FacultyLoginPage() {
           </MotionDiv>
         </div>
       </MotionSection>
-    </>
   );
 }

@@ -15,8 +15,44 @@ type BlockProps = {
   reverse?: boolean;
   readMoreHref?: string;
   showPhone?: boolean;
+  visual?: "image" | "facts";
   variant?: "default" | "official";
 };
+
+function CollegeFactsPanel() {
+  const facts = [
+    { value: siteConfig.established, label: "Established" },
+    { value: "25+", label: "Years" },
+    { value: "8+", label: "Programmes" },
+    { value: "NAAC", label: "Accredited" },
+  ];
+  const streams = ["BDS", "D-Pharma", "Paramedical", "Veterinary", "B.Com", "BBA / MBA"];
+
+  return (
+    <div className="flex h-full flex-col justify-center rounded-2xl bg-gradient-to-br from-brand-maroon to-brand-maroon-dark p-8 text-white shadow-md sm:p-10">
+      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-orange">
+        {siteConfig.trust}
+      </p>
+      <h4 className="mt-3 font-serif text-2xl font-bold leading-snug sm:text-3xl">{siteConfig.shortName}</h4>
+      <p className="mt-2 text-sm text-white/70">Healthcare and professional education in Jalaun.</p>
+      <div className="mt-8 grid grid-cols-2 gap-4">
+        {facts.map((item) => (
+          <div key={item.label} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+            <p className="font-serif text-2xl font-bold">{item.value}</p>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-white/60">{item.label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 flex flex-wrap gap-2">
+        {streams.map((stream) => (
+          <span key={stream} className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold">
+            {stream}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function AboutBlock({
   index,
@@ -29,6 +65,7 @@ function AboutBlock({
   reverse = false,
   readMoreHref = "/about-trust",
   showPhone = true,
+  visual = "image",
   variant = "default",
 }: BlockProps) {
   const isOfficial = variant === "official";
@@ -43,18 +80,22 @@ function AboutBlock({
         className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14"
       >
         <div className={`relative ${reverse ? "lg:order-2" : ""}`}>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
-            <div className="absolute bottom-4 right-4 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-brand-maroon shadow-md">
-              {badge}
+          {visual === "facts" ? (
+            <CollegeFactsPanel />
+          ) : (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+              <Image
+                src={image}
+                alt={title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute bottom-4 right-4 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-brand-maroon shadow-md">
+                {badge}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className={reverse ? "lg:order-1" : ""}>
@@ -75,20 +116,6 @@ function AboutBlock({
             >
               Read More
             </Link>
-            {showPhone && (
-              <div className="flex flex-wrap items-center gap-3">
-                {siteConfig.phones.map((phone) => (
-                  <a
-                    key={phone}
-                    href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-black hover:text-brand-orange"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">📞</span>
-                    {phone}
-                  </a>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </MotionDiv>
@@ -242,7 +269,8 @@ export default function AboutSections({
               key={block.title}
               {...block}
               index={i}
-              showPhone={i === 0}
+              showPhone={false}
+              visual={i === 0 ? "facts" : "image"}
               variant={variant}
             />
           ))}

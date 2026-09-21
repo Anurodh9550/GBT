@@ -2,7 +2,6 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
 import { MotionSection, MotionDiv } from "@/components/motion";
 import { useUi } from "@/components/ui/UiProvider";
 import { siteConfig } from "@/lib/site-config";
@@ -163,18 +162,15 @@ export default function EnquiryFormPage() {
   };
 
   return (
-    <>
-      <PageHero
-        variant="centered"
-        title="College Enquiry Form"
-        subtitle="Fill this form and our admissions team will contact you"
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Enquiry Form" },
-        ]}
-      />
-      <MotionSection className="section-padding bg-slate-50">
+    <MotionSection className="bg-slate-50 py-8 lg:py-10">
         <div className="mx-auto max-w-xl px-4">
+          <nav className="mb-5 flex flex-wrap items-center gap-2 text-[13px] text-slate-500">
+            <Link href="/" className="hover:text-brand-orange">
+              Home
+            </Link>
+            <span className="text-slate-300">/</span>
+            <span className="font-medium text-brand-maroon">Enquiry Form</span>
+          </nav>
           <div className="mb-6 flex flex-col items-center justify-center gap-3 rounded-2xl border border-brand-orange/25 bg-brand-orange/5 p-4 text-center sm:flex-row sm:p-5">
             <p className="text-sm text-slate-600">
               Ready to apply? Complete your admission registration.
@@ -421,6 +417,5 @@ export default function EnquiryFormPage() {
           </MotionDiv>
         </div>
       </MotionSection>
-    </>
   );
 }

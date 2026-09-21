@@ -51,9 +51,12 @@ export const mainNav: NavItem[] = [
   {
     label: "Academics",
     href: "/academics",
-    matchPaths: ["/academics", "/courses"],
   },
-  { label: "Admissions", href: "/admissions" },
+  {
+    label: "Admissions",
+    href: "/admissions",
+    matchPaths: ["/admissions", "/courses"],
+  },
   {
     label: "Campus",
     href: "/campus-life",
@@ -78,9 +81,10 @@ export const mainNav: NavItem[] = [
   },
 ];
 
-export const academicsDropdown = [
-  { label: "Academic Overview", href: "/academics" },
+export const admissionsDropdown = [
+  { label: "Admissions", href: "/admissions" },
   { label: "Our Courses", href: "/courses" },
+  { label: "Register", href: "/admissions/register" },
 ];
 
 export const campusDropdown = [

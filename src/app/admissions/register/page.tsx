@@ -17,7 +17,7 @@ export default function AdmissionRegisterPage() {
           { label: "Register" },
         ]}
       />
-      <section className="section-padding bg-slate-50">
+      <section className="bg-slate-50 py-8 lg:py-10">
         <div className="mx-auto max-w-3xl px-4">
           <AdmissionRegisterForm />
         </div>
