@@ -286,9 +286,6 @@ function AdmissionHero({ title, subtitle, breadcrumb, image, imageAlt, images }:
             <Link href={siteConfig.admissionRegisterUrl} className="btn-primary">
               {siteConfig.ctaRegisterLabel} →
             </Link>
-            <Link href={siteConfig.enquiryFormUrl} className="btn-outline-maroon">
-              {siteConfig.enquiryCtaLabel} →
-            </Link>
           </MotionDiv>
           <a
             href={siteConfig.admissionFormPdf}
