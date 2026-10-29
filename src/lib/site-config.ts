@@ -60,7 +60,7 @@ export const mainNav: NavItem[] = [
   {
     label: "Campus",
     href: "/campus-life",
-    matchPaths: ["/campus-life", "/placements", "/news-events", "/gallery"],
+    matchPaths: ["/campus-life", "/placements", "/careers", "/news-events", "/gallery"],
   },
   { label: "Contact", href: "/contact" },
   {
@@ -90,6 +90,7 @@ export const admissionsDropdown = [
 export const campusDropdown = [
   { label: "Campus Life", href: "/campus-life" },
   { label: "Placements", href: "/placements" },
+  { label: "Careers", href: "/careers" },
   { label: "News & Events", href: "/news-events" },
   { label: "Photo Gallery", href: "/gallery" },
 ];
