@@ -85,7 +85,10 @@ export default function Footer() {
           </MotionItem>
 
           {[
-            { title: "Quick Links", items: mainNav },
+            {
+              title: "Quick Links",
+              items: [...mainNav, { label: "Careers", href: "/careers" }],
+            },
             { title: "Student Portal", items: portalNav },
           ].map((col) => (
             <MotionItem key={col.title}>
@@ -126,7 +129,12 @@ export default function Footer() {
       <div className="border-t border-white/10 bg-[#2a1515]">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs font-normal text-white/50">
           <p>&copy; {new Date().getFullYear()} {siteConfig.trust}. All rights reserved.</p>
-          <p>Managed by {siteConfig.trust}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link href="/careers" className="font-semibold text-white/80 transition hover:text-white">
+              Careers
+            </Link>
+            <p>Managed by {siteConfig.trust}</p>
+          </div>
         </div>
       </div>
     </motion.footer>
